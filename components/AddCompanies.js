@@ -10,6 +10,7 @@ const AddCompanies = () => {
   const [companies, setCompanies] = useState([]);
   const [newCompany, setNewCompany] = useState({
     name: "",
+    street_number: "",
     street: "",
     city: "",
     postal_code: "",
@@ -45,6 +46,7 @@ const AddCompanies = () => {
     try {
       const {
         name,
+        street_number,
         street,
         city,
         postal_code,
@@ -60,11 +62,12 @@ const AddCompanies = () => {
         name: name,
         addresses: [
           {
+            street_number: street_number,
             street: street,
             city: city,
             postal_code: postal_code,
             country: country,
-            customer_address: street + ", " + city,
+            customer_address: street_number + " " + street + ", " + city,
           },
         ],
         company_status: isChecked ? "customer" : "cold prospect",
@@ -106,6 +109,17 @@ const AddCompanies = () => {
           setNewCompany({
             ...newCompany,
             name: text,
+          })
+        }
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Numéro de rue"
+        value={newCompany.street_number}
+        onChangeText={(text) =>
+          setNewCompany({
+            ...newCompany,
+            street_number: text,
           })
         }
       />
