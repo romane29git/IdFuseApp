@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { screenOptions } from "../theme/styles";
-import EditContact from "../components/EditContact";
+import Activities from "../components/Activities";
 
 const DevisStack = createStackNavigator();
 
@@ -12,9 +12,9 @@ const DevisStackNavigator = () => {
       screenOptions={screenOptions}
     >
       <DevisStack.Screen
-        name="EditContact"
-        component={EditContact}
-        options={{ title: "EditContact", headerShown: false }}
+        name="Activities"
+        component={Activities}
+        options={{ title: "Activities", headerShown: false }}
       />
     </DevisStack.Navigator>
   );
