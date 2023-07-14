@@ -126,10 +126,15 @@ const Companies = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={() => handleAdd()}>
-        <Text style={styles.buttonText}>Ajouter</Text>
-      </TouchableOpacity>
-      <Text style={styles.title}>Liste des entreprises</Text>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Liste des entreprises</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={() => handleAdd()}>
+            <Text style={styles.buttonText}>Ajouter</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <View style={styles.filterContainer}>
         <TouchableOpacity>
           <View style={styles.filterItem}>
@@ -231,14 +236,12 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     fontStyle: "italic",
   },
-  title: {
-    fontSize: 24,
+  buttonText: {
+    color: "white",
     fontWeight: "bold",
-    color: "#333",
-    marginBottom: 10,
-    marginLeft: 10,
-    marginRight: 10,
+    textAlign: "center",
   },
+
   customer: {
     backgroundColor: "#1ccf60",
     borderRadius: 15,
@@ -253,12 +256,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     margin: 6,
   },
-  buttonContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    flexDirection: "row",
-    alignItems: "center",
-  },
+
   backArrow: {
     width: 20,
     height: 20,
@@ -286,5 +284,28 @@ const styles = StyleSheet.create({
   arrowIcon: {
     fontSize: 25,
     marginLeft: 5,
+  },
+  titleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    marginLeft: "auto",
+  },
+  button: {
+    backgroundColor: "blue",
+    padding: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  title: {
+    flex: 1,
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 20,
   },
 });
