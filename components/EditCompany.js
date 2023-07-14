@@ -77,13 +77,13 @@ const EditCompany = ({ route }) => {
           style={styles.backArrow}
         />
       </TouchableOpacity>
-      <Text>Modifier l'entreprise</Text>
-
+      <View style={styles.headingContainer}>
+        <Text style={styles.headingText}>Modifier {company.name}</Text>
+      </View>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Nom :</Text>
         <TextInput value={name} onChangeText={setName} style={styles.input} />
       </View>
-
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Statut :</Text>
         <TextInput
@@ -92,7 +92,6 @@ const EditCompany = ({ route }) => {
           style={styles.input}
         />
       </View>
-
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Numéro de rue :</Text>
         <TextInput
@@ -101,7 +100,6 @@ const EditCompany = ({ route }) => {
           style={styles.input}
         />
       </View>
-
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Rue :</Text>
         <TextInput
@@ -110,12 +108,10 @@ const EditCompany = ({ route }) => {
           style={styles.input}
         />
       </View>
-
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Ville :</Text>
         <TextInput value={city} onChangeText={setCity} style={styles.input} />
       </View>
-
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Pays :</Text>
         <TextInput
@@ -124,8 +120,9 @@ const EditCompany = ({ route }) => {
           style={styles.input}
         />
       </View>
-
-      <Button title="Modifier" onPress={handleSubmit} />
+      <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+        <Text style={styles.buttonText}>Modifier</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };
@@ -156,11 +153,36 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     marginBottom: 8,
+    color: "#333",
   },
   input: {
     borderWidth: 1,
-    borderColor: "gray",
+    borderColor: "#ccc",
     padding: 8,
     fontSize: 16,
+    borderRadius: 4,
+    color: "#333",
+  },
+  button: {
+    backgroundColor: "#5fabfe",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    alignItems: "center",
+    width: "30%",
+    alignSelf: "center",
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  headingContainer: {
+    marginBottom: 24,
+  },
+  headingText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#333",
   },
 });
