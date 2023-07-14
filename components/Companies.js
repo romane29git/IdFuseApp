@@ -119,7 +119,7 @@ const Companies = () => {
   const handleCityDescFilter = () => {
     setFilter("citydesc");
   };
-
+ 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Liste des entreprises</Text>
