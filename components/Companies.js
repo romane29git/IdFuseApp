@@ -96,6 +96,10 @@ const Companies = () => {
     navigation.navigate("Company", { id: item.id, name: item.name });
   };
 
+  const handleAdd = (item) => {
+    navigation.navigate("AddCompanies");
+  };
+
   const handleAlphaAscFilter = () => {
     setFilter("alphaasc");
   };
@@ -119,9 +123,12 @@ const Companies = () => {
   const handleCityDescFilter = () => {
     setFilter("citydesc");
   };
- 
+
   return (
     <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={() => handleAdd()}>
+        <Text style={styles.buttonText}>Ajouter</Text>
+      </TouchableOpacity>
       <Text style={styles.title}>Liste des entreprises</Text>
       <View style={styles.filterContainer}>
         <TouchableOpacity>
@@ -258,28 +265,26 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   filterContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    flexDirection: "row",
+    justifyContent: "space-around",
     marginBottom: 10,
   },
   filterItem: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
   },
   filterText: {
-    fontSize : 16,
+    fontSize: 16,
     marginRight: 5,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   arrowContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   arrowIcon: {
-    fontSize : 25,
+    fontSize: 25,
     marginLeft: 5,
   },
 });
-
-
