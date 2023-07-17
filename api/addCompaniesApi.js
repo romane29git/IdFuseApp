@@ -13,7 +13,6 @@ export class Company {
     customer_address,
     effectif,
     secteur,
-    company_status,
     produit,
     registration_number, 
     solution_crm
@@ -32,7 +31,6 @@ export class Company {
     ];
     this.produit = produit;
     this.effectif = effectif;
-    this.company_status = company_status;
     this.secteur = secteur;
     this.registration_number = registration_number;
     this.solution_crm = solution_crm;
@@ -112,7 +110,6 @@ class AddCompaniesApi {
       company.Produits,
       company["Effectif entreprise"],
       company["Secteur activite"],
-      company.company_status,
       company.registration_number,
       company['Solution CRM actuelle'],
     );

@@ -17,10 +17,8 @@ const AddCompanies = () => {
     postal_code: "",
     country: "",
     customer_address: "",
-    company_status: "",
     registration_number: "",
   });
-  const [isChecked, setChecked] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -28,14 +26,6 @@ const AddCompanies = () => {
       setCompanies(fetchedCompanies);
     } catch (error) {
       console.error("Erreur lors de la récupération des entreprises :", error);
-    }
-  };
-
-  const handleCheckboxChange = () => {
-    if (isChecked == true) {
-      setChecked(false);
-    } else {
-      setChecked(true);
     }
   };
 
@@ -48,7 +38,6 @@ const AddCompanies = () => {
       postal_code: "",
       country: "",
       customer_address: "",
-      company_status: "",
       registration_number: "",
     });
 
@@ -79,7 +68,6 @@ const AddCompanies = () => {
             customer_address: street_number + " " + street + ", " + city,
           },
         ],
-        company_status: isChecked ? "customer" : "cold prospect",
         registration_number: registration_number,
       };
 
@@ -96,7 +84,6 @@ const AddCompanies = () => {
         postal_code: "",
         country: "",
         customer_address: "",
-        company_status: "",
         registration_number: "",
       });
 
@@ -180,16 +167,6 @@ const AddCompanies = () => {
           })
         }
       />
-
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Checkbox
-          style={styles.checkbox}
-          value={isChecked}
-          onValueChange={handleCheckboxChange}
-          color={isChecked ? "#5fabfe" : undefined}
-        />
-        <Text>Client</Text>
-      </View>
 
       <TextInput
         style={styles.input}
