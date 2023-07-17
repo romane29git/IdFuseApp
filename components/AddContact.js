@@ -14,11 +14,7 @@ const AddContacts = () => {
     opportunity_name: "",
     contact_first_name: "",
     contact_last_name: "",
-    emails: [
-      {
-        mail: "",
-      },
-    ],
+    email: "",
   });
 
   const handleAddContact = async () => {
@@ -32,7 +28,7 @@ const AddContacts = () => {
         opportunity_name,
         contact_first_name,
         contact_last_name,
-        mail,
+        email,
       } = newContact;
 
       const contactData = {
@@ -59,7 +55,7 @@ const AddContacts = () => {
         ],
         emails: [
           {
-            mail: newContact.emails[0].mail,
+            email: email,
           },
         ],
       };
@@ -68,7 +64,7 @@ const AddContacts = () => {
 
       await addContact(contactData);
     } catch (error) {
-      console.error("Erreur lors de l'ajout de l'entreprise :", error);
+      console.error("Erreur lors de l'ajout du contact :", error);
     }
   };
 
@@ -99,11 +95,11 @@ const AddContacts = () => {
       />
 
       <TextInput
-        value={newContact.mail}
+        value={newContact.email}
         onChangeText={(text) =>
           setNewContact((prevContact) => ({
             ...prevContact,
-            mail: text,
+            email: text,
           }))
         }
         placeholder="Email"

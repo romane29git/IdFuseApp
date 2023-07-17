@@ -11,7 +11,7 @@ export class Contact {
     opportunity_name,
     contact_first_name,
     contact_last_name,
-    mail
+    email
   ) {
     this.id = id;
     this.first_name = first_name;
@@ -36,7 +36,7 @@ export class Contact {
     ];
     this.emails = [
       {
-        mail: mail,
+        email: email,
       },
     ];
   }
@@ -44,7 +44,7 @@ export class Contact {
 
 export default async function addContact(newContact) {
   try {
-    console.log("Données de l'entreprise à ajouter :", newContact);
+    console.log("Données du contact à ajouter :", newContact);
 
     const response = await fetch(rootEndpoint, {
       method: "POST",
@@ -56,15 +56,15 @@ export default async function addContact(newContact) {
     });
 
     if (response.ok) {
-      console.log("Entreprise ajoutée avec succès");
+      console.log("Contact ajouté avec succès");
     } else {
       throw new Error(
-        "Erreur lors de l'ajout de l'entreprise. Statut de la réponse : " +
+        "Erreur lors de l'ajout du contact. Statut de la réponse : " +
           response.status
       );
     }
   } catch (error) {
-    console.error("Erreur lors de l'ajout de l'entreprise :", error);
+    console.error("Erreur lors de l'ajout du contact :", error);
     throw error;
   }
 }
@@ -97,7 +97,7 @@ class AddContactApi {
       const data = await response.json();
       return data;
     } catch (error) {
-      console.error("Erreur lors de la récupération des entreprises :", error);
+      console.error("Erreur lors de la récupération des contacts :", error);
       throw error;
     }
   }
@@ -112,7 +112,7 @@ class AddContactApi {
       contact.opportunity_name,
       contact.contact_first_name,
       contact.contact_last_name,
-      contact.mail
+      contact.email
     );
   }
 
