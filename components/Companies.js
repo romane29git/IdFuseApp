@@ -241,7 +241,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-
   customer: {
     backgroundColor: "#1ccf60",
     borderRadius: 15,
@@ -257,11 +256,6 @@ const styles = StyleSheet.create({
     margin: 6,
   },
 
-  backArrow: {
-    width: 20,
-    height: 20,
-    marginRight: 5,
-  },
   filterContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -296,11 +290,6 @@ const styles = StyleSheet.create({
     backgroundColor: "blue",
     padding: 10,
     borderRadius: 5,
-  },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
   },
   title: {
     flex: 1,

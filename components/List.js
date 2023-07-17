@@ -80,28 +80,4 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 5,
   },
-  item: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 8,
-  },
-  label: {
-    fontWeight: "bold",
-    marginRight: 8,
-  },
-  scheduled: {
-    color: "#00C853",
-  },
-  draft: {
-    color: "#FF5722",
-  },
-  text: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
 });

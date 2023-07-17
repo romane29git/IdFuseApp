@@ -94,11 +94,7 @@ const styles = StyleSheet.create({
     height: 20,
     marginRight: 5,
   },
-  item: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
+
   row: {
     flexDirection: "row",
     alignItems: "center",

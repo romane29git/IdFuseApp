@@ -105,6 +105,18 @@ const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: "#fff",
   },
+  contactContainer: {
+    backgroundColor: "#f5f5f5",
+    padding: 12,
+    marginBottom: 8,
+    borderRadius: 8,
+  },
+  buttonContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    flexDirection: "row",
+    alignItems: "center",
+  },
   text: {
     fontSize: 16,
     marginBottom: 8,
@@ -116,12 +128,6 @@ const styles = StyleSheet.create({
     color: "#333",
     fontStyle: "italic",
     textAlign: "center",
-  },
-  contactContainer: {
-    backgroundColor: "#f5f5f5",
-    padding: 12,
-    marginBottom: 8,
-    borderRadius: 8,
   },
   contactText: {
     fontSize: 14,
@@ -140,18 +146,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: "#333",
     fontWeight: "bold",
-  },
-  statut: {
-    fontSize: 13,
-    color: "white",
-    fontWeight: "bold",
-    margin: 6,
-  },
-  buttonContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
   },
   backArrow: {
     width: 20,

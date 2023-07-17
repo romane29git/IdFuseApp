@@ -346,11 +346,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 4,
   },
-  iconContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 8,
-  },
   sectionTitle: {
     fontSize: 24,
     fontWeight: "bold",
@@ -416,42 +411,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  tabBar: {
-    backgroundColor: "#fff",
-  },
-  tabIndicator: {
-    backgroundColor: "#333",
-  },
-  tab: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 8,
-  },
-  tabText: {
-    fontSize: 16,
-    color: "#333",
-  },
-  activeTabText: {
-    fontSize: 16,
-    color: "#fff",
-  },
-  notificationBadge: {
-    position: "absolute",
-    top: -8,
-    right: -8,
-    backgroundColor: "red",
-    borderRadius: 10,
-    width: 20,
-    height: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  notificationText: {
-    color: "#fff",
-    fontSize: 12,
-    fontWeight: "bold",
-  },
+
+  
   iconBadge: {
     position: "absolute",
     top: -8,
@@ -486,7 +447,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginTop: 16,
     alignSelf: "center",
-    width: '25%',
+    width: "25%",
   },
   buttonText: {
     color: "#fff",

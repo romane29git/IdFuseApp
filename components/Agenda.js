@@ -112,10 +112,6 @@ const styles = StyleSheet.create({
   eventName: {
     fontSize: 16,
   },
-  inputContainer: {
-    flexDirection: "row",
-    marginBottom: 10,
-  },
   input: {
     flex: 1,
     marginRight: 10,
@@ -123,14 +119,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#CCCCCC",
     borderRadius: 5,
-  },
-  taskContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 10,
-  },
-  taskText: {
-    flex: 1,
-    fontSize: 16,
   },
 });
