@@ -6,16 +6,14 @@ import Checkbox from "expo-checkbox";
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
-  const [isChecked, setChecked] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
       const fetchedActivities = await activitiesApi.fetchActivities();
       const updatedActivities = fetchedActivities.map((activity) => ({
         ...activity,
-        isChecked: false, // Ajout de la propriété isChecked avec la valeur par défaut false
+        isChecked: false,
       }));
-      console.log(fetchedActivities);
       setActivities(updatedActivities);
     }
 
@@ -40,12 +38,15 @@ const Activities = () => {
     };
     return (
       <View style={styles.itemContainer}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Checkbox
-          style={styles.checkbox}
-          value={item.isChecked}
-          onValueChange={handleCheckboxChange}
-        />
+        <View style={styles.checkboxContainer}>
+          <Text style={styles.name}>{item.name}</Text>
+          <Checkbox
+            style={styles.checkbox}
+            value={item.isChecked}
+            onValueChange={handleCheckboxChange}
+          />
+        </View>
+
         <View style={styles.titleContainer}>
           <BubbleIcon
             iconName={
@@ -123,5 +124,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 20,
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
