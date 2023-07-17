@@ -74,6 +74,7 @@ const AddContacts = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <Text style={styles.title}>Ajouter un contact</Text>
       <TextInput
         value={newContact.first_name}
         onChangeText={(text) =>
