@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import addContact from "../api/addContactApi";
 import styles from "../theme/styles";
 import Button from "./Button";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 const AddContacts = () => {
   const [newContact, setNewContact] = useState({
@@ -16,6 +17,14 @@ const AddContacts = () => {
     contact_last_name: "",
     email: "",
   });
+
+  const handleReinit = () => {
+    setNewContact({
+      first_name: "",
+      last_name: "",
+      email: "",
+    });
+  };
 
   const handleAddContact = async () => {
     try {
@@ -63,6 +72,12 @@ const AddContacts = () => {
       console.log("Données du contact :", contactData);
 
       await addContact(contactData);
+
+      setNewContact({
+        first_name: "",
+        last_name: "",
+        email: "",
+      });
     } catch (error) {
       console.error("Erreur lors de l'ajout du contact :", error);
     }
@@ -105,6 +120,10 @@ const AddContacts = () => {
         placeholder="Email"
         style={styles.input}
       />
+
+      <Button mode="outlined" onPress={handleReinit}>
+        <Icon name="sync-alt" size={18} color="#5fabfe" />
+      </Button>
       <Button mode="outlined" onPress={handleAddContact}>
         Ajouter
       </Button>
