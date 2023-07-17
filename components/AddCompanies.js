@@ -5,6 +5,7 @@ import addCompany from "../api/addCompaniesApi";
 import styles from "../theme/styles";
 import Button from "./Button";
 import Checkbox from "expo-checkbox";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 const AddCompanies = () => {
   const [companies, setCompanies] = useState([]);
@@ -36,6 +37,22 @@ const AddCompanies = () => {
     } else {
       setChecked(true);
     }
+  };
+
+  const handleReinit = () => {
+    setNewCompany({
+      name: "",
+      street_number: "",
+      street: "",
+      city: "",
+      postal_code: "",
+      country: "",
+      customer_address: "",
+      company_status: "",
+      registration_number: "",
+    });
+
+    setChecked(false);
   };
 
   const handleAddCompany = async () => {
@@ -169,7 +186,7 @@ const AddCompanies = () => {
           style={styles.checkbox}
           value={isChecked}
           onValueChange={handleCheckboxChange}
-          color={isChecked ? "#E9F" : undefined}
+          color={isChecked ? "#5fabfe" : undefined}
         />
         <Text>Client</Text>
       </View>
@@ -185,6 +202,10 @@ const AddCompanies = () => {
           })
         }
       />
+
+      <Button mode="outlined" onPress={handleReinit}>
+        <Icon name="sync-alt" size={18} color="#5fabfe" />
+      </Button>
 
       <Button mode="outlined" onPress={handleAddCompany}>
         Ajouter
