@@ -18,8 +18,9 @@ class activitiesApi {
   async fetchActivities() {
     const response = await this.fetchFromApi(rootEndpoint);
     if (response && typeof response === "object") {
-      const activity = response.activities;
-      return this.createActivity(activity);
+      const activitiesData = response.activities;
+      const activities = this.createActivities(activitiesData);
+      return activities;
     } else {
       console.error("Invalid API response:", response);
       return [];
