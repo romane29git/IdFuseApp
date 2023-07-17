@@ -4,13 +4,22 @@ const rootEndpoint =
   "https://app.idfuse.fr/api/activities?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78";
 
 export class Activity {
-  constructor(id, name, type_event, duration, date_start, contactName) {
+  constructor(
+    id,
+    name,
+    type_event,
+    duration,
+    date_start,
+    contactName,
+    companyName
+  ) {
     this.id = id;
     this.name = name;
     this.type_event = type_event;
     this.duration = duration;
     this.date_start = date_start;
     this.contactName = contactName;
+    this.companyName = companyName;
   }
 }
 
@@ -44,7 +53,8 @@ class activitiesApi {
       activity.type_event,
       activity.duration,
       activity.date_start,
-      activity.contactName
+      activity.contactName,
+      activity.companyName,
     );
   }
 

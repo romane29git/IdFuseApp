@@ -42,7 +42,12 @@ const Activities = () => {
       </View>
       <Text style={styles.info}>Durée : {item.duration} minutes</Text>
       <Text style={styles.info}>Date : {item.date_start}</Text>
-      <Text style={styles.info}>Contact : {item.contactName}</Text>
+      <Text style={styles.info}>
+        {item.companyName ? `Organisation : ${item.companyName}` : null}
+      </Text>
+      <Text style={styles.info}>
+        {item.contactName ? `Contact : ${item.contactName}` : null}
+      </Text>
     </View>
   );
 
