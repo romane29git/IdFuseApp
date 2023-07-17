@@ -1,6 +1,7 @@
 import { Text, View, FlatList, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import activitiesApi from "../api/activitiesApi";
+import Icon from "react-native-vector-icons/FontAwesome5";
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
@@ -15,10 +16,30 @@ const Activities = () => {
     fetchData();
   }, []);
 
+  const BubbleIcon = ({ iconName }) => {
+    return (
+      <View style={styles.bubble}>
+        <Icon name={iconName} size={18} color="#5fabfe" />
+      </View>
+    );
+  };
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Text style={styles.name}>{item.name}</Text>
-      <Text style={styles.city}>{item.type_event}</Text>
+      <View style={styles.titleContainer}>
+        <BubbleIcon
+          iconName={
+            item.type_event === "call"
+              ? "phone"
+              : item.type_event === "meeting"
+              ? "users"
+              : item.type_event === "mail"
+              ? "envelope"
+              : "tasks"
+          }
+        />
+        <Text style={styles.city}> {item.type_event}</Text>
+      </View>
       <Text style={styles.info}>Durée : {item.duration} minutes</Text>
       <Text style={styles.info}>Date : {item.date_start}</Text>
       <Text style={styles.info}>Contact : {item.contactName}</Text>
