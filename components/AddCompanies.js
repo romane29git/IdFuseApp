@@ -18,10 +18,6 @@ const AddCompanies = () => {
     customer_address: "",
     company_status: "",
     registration_number: "",
-    solution_crm: "",
-    effectif: "",
-    secteur: "",
-    produit: "",
   });
   const [isChecked, setChecked] = useState(false);
 
@@ -52,10 +48,6 @@ const AddCompanies = () => {
         postal_code,
         country,
         registration_number,
-        solution_crm,
-        effectif,
-        secteur,
-        produit,
       } = newCompany;
 
       const companyData = {
@@ -72,10 +64,6 @@ const AddCompanies = () => {
         ],
         company_status: isChecked ? "customer" : "cold prospect",
         registration_number: registration_number,
-        solution_crm: solution_crm,
-        effectif: effectif,
-        secteur: secteur,
-        produit: produit,
       };
 
       console.log("Données de l'entreprise :", companyData);
@@ -83,16 +71,21 @@ const AddCompanies = () => {
       // Appeler la méthode pour ajouter une entreprise
       await addCompany(companyData);
 
-      // // Réinitialiser les valeurs des champs de saisie
-      // setNewCompany({
-      //   name: "",
-      //   street: "",
-      //   city: "",
-      //   postal_code: "",
-      //   country: "",
-      // });
+      setNewCompany({
+        name: "",
+        street_number: "",
+        street: "",
+        city: "",
+        postal_code: "",
+        country: "",
+        customer_address: "",
+        company_status: "",
+        registration_number: "",
+      });
 
-      // Rafrtaîchir la liste des entreprises
+      setChecked(false);
+
+      // Rafraîchir la liste des entreprises
       fetchData();
     } catch (error) {
       console.error("Erreur lors de l'ajout de l'entreprise :", error);
@@ -189,54 +182,6 @@ const AddCompanies = () => {
           setNewCompany({
             ...newCompany,
             registration_number: text,
-          })
-        }
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Effectif de l'entreprise"
-        value={newCompany.effectif}
-        onChangeText={(text) =>
-          setNewCompany({
-            ...newCompany,
-            effectif: text,
-          })
-        }
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Produits"
-        value={newCompany.produit}
-        onChangeText={(text) =>
-          setNewCompany({
-            ...newCompany,
-            produit: text,
-          })
-        }
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Secteur d'acticité"
-        value={newCompany.secteur}
-        onChangeText={(text) =>
-          setNewCompany({
-            ...newCompany,
-            secteur: text,
-          })
-        }
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Solution CRM actuelle"
-        value={newCompany.solution_crm}
-        onChangeText={(text) =>
-          setNewCompany({
-            ...newCompany,
-            solution_crm: text,
           })
         }
       />

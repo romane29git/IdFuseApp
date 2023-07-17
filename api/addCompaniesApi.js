@@ -5,7 +5,7 @@ export class Company {
   constructor(
     id,
     name,
-    stree_number,
+    street_number,
     street,
     city,
     postal_code,
@@ -22,7 +22,7 @@ export class Company {
     this.name = name;
     this.addresses = [
       {
-        stree_number: stree_number,
+        street_number: street_number,
         street: street,
         city: city,
         postal_code: postal_code,
@@ -103,7 +103,7 @@ class AddCompaniesApi {
     return new Company(
       company.id,
       company.name,
-      company.stree_number,
+      company.street_number,
       company.street,
       company.city,
       company.postal_code,
