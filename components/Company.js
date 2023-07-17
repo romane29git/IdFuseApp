@@ -159,9 +159,7 @@ const Company = ({ route }) => {
                       : "comments"
                   }
                 />
-                <Text style={styles.title}>
-                  {timeline.firstName} {timeline.lastName} Name
-                </Text>
+                <Text style={styles.title}> {timeline.name}</Text>
               </View>
 
               <Text style={styles.legende}>
@@ -176,14 +174,18 @@ const Company = ({ route }) => {
               <Text style={styles.contactText}>
                 Date : {timeline.date_start}
               </Text>
-              <Text style={styles.contactText}>{timeline.name}</Text>
               <Text style={styles.contactText}>
-                Commentaire : {timeline.comments_note}
+                {timeline.firstName} {timeline.lastName}
+              </Text>
+              <Text style={styles.contactText}>
+                {timeline.comments_note
+                  ? `Commentaire : ${timeline.comments_note}`
+                  : null}
               </Text>
             </View>
           ))
         ) : (
-          <Text>Aucune facture disponible</Text>
+          <Text>Pas de timeline disponible</Text>
         )}
       </ScrollView>
     );
@@ -412,7 +414,6 @@ const styles = StyleSheet.create({
     padding: 16,
   },
 
-  
   iconBadge: {
     position: "absolute",
     top: -8,
