@@ -11,6 +11,7 @@
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-community/checkbox": "^0.5.16",
     "@react-native-mapbox-gl/maps": "^8.6.0-beta.0",
+    "@react-native-picker/picker": "^2.4.10",
     "@react-navigation/bottom-tabs": "^6.5.8",
     "@react-navigation/material-top-tabs": "^6.6.2",
     "@react-navigation/native": "^6.1.6",
@@ -19,6 +20,7 @@
     "axios": "^1.4.0",
     "expo": "~48.0.18",
     "expo-checkbox": "~2.3.1",
+    "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "moment": "^2.29.4",
     "react": "18.2.0",
@@ -34,8 +36,7 @@
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^9.2.0",
     "react-navigation": "^4.4.4",
-    "react-navigation-hooks": "^1.1.0",
-    "expo-splash-screen": "~0.18.2"
+    "react-navigation-hooks": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5"

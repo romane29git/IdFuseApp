@@ -4,6 +4,7 @@ import addContact from "../api/addContactApi";
 import styles from "../theme/styles";
 import Button from "./Button";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { Picker } from "@react-native-picker/picker";
 
 const AddContacts = () => {
   const [newContact, setNewContact] = useState({
@@ -17,6 +18,7 @@ const AddContacts = () => {
     contact_last_name: "",
     email: "",
   });
+  const [enable, setEnable] = useState("courses");
 
   const handleReinit = () => {
     setNewContact({
@@ -120,6 +122,20 @@ const AddContacts = () => {
         placeholder="Email"
         style={styles.input}
       />
+
+      <Picker
+        selectedValue={enable}
+        style={{ height: 50, width: 250 }}
+        mode={"dialog"}
+        onValueChange={(itemValue) => setEnable(itemValue)}
+      >
+        <Picker.Item label="Courses" value="courses" />
+        <Picker.Item label="Data-Structures" value="DSA" />
+        <Picker.Item label="ReactJs" value="react" />
+        <Picker.Item label="C++" value="cpp" />
+        <Picker.Item label="Python" value="py" />
+        <Picker.Item label="Java" value="java" />
+      </Picker>
 
       <Button mode="outlined" onPress={handleReinit}>
         <Icon name="sync-alt" size={18} color="#5fabfe" />
