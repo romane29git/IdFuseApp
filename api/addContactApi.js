@@ -6,7 +6,6 @@ export class Contact {
     id,
     first_name,
     last_name,
-    company_name,
     company_id,
     opportunity_name,
     contact_first_name,
@@ -16,10 +15,10 @@ export class Contact {
     this.id = id;
     this.first_name = first_name;
     this.last_name = last_name;
+    this.company_id = company_id;
     this.companies = [
       {
-        company_id: company_id,
-        company_name: company_name,
+        id: company_id,
       },
     ];
     this.opportunities = [
@@ -107,7 +106,6 @@ class AddContactApi {
       contact.id,
       contact.first_name,
       contact.last_name,
-      contact.company_name,
       contact.company_id,
       contact.opportunity_name,
       contact.contact_first_name,

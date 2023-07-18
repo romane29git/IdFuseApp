@@ -1,24 +1,24 @@
-import { Text, View, TextInput, ScrollView } from "react-native";
+import { Text, View, TextInput, ScrollView, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import addContact from "../api/addContactApi";
 import styles from "../theme/styles";
 import Button from "./Button";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Picker } from "@react-native-picker/picker";
+import companiesApi from "../api/companiesApi";
 
 const AddContacts = () => {
   const [newContact, setNewContact] = useState({
     id: "",
     first_name: "",
     last_name: "",
-    company_name: "",
     company_id: "",
     opportunity_name: "",
     contact_first_name: "",
     contact_last_name: "",
     email: "",
   });
-  const [enable, setEnable] = useState("courses");
+  const [companies, setCompanies] = useState([{ id: "", name: "Aucune" }]);
 
   const handleReinit = () => {
     setNewContact({
@@ -34,7 +34,6 @@ const AddContacts = () => {
         id,
         first_name,
         last_name,
-        company_name,
         company_id,
         opportunity_name,
         contact_first_name,
@@ -46,11 +45,11 @@ const AddContacts = () => {
         id: id,
         first_name: first_name,
         last_name: last_name,
+        company_id: company_id,
 
         companies: [
           {
-            company_id: company_id,
-            company_name: company_name,
+            id: company_id,
           },
         ],
         opportunities: [
@@ -80,10 +79,30 @@ const AddContacts = () => {
         last_name: "",
         email: "",
       });
+
+      //remettre liste à vide
     } catch (error) {
       console.error("Erreur lors de l'ajout du contact :", error);
     }
   };
+
+  useEffect(() => {
+    // Chargez les données des entreprises ici
+    const fetchData = async () => {
+      try {
+        const companiesData = await companiesApi.fetchCompanies();
+        const companiesWithNone = [
+          { id: "", name: "Aucune" },
+          ...companiesData,
+        ];
+        setCompanies(companiesWithNone);
+      } catch (error) {
+        console.error("Erreur lors du chargement des entreprises :", error);
+      }
+    };
+
+    fetchData(); // Appelez la fonction pour charger les entreprises
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
@@ -124,17 +143,27 @@ const AddContacts = () => {
       />
 
       <Picker
-        selectedValue={enable}
+        selectedValue={newContact.company_id}
         style={{ height: 50, width: 250 }}
         mode={"dialog"}
-        onValueChange={(itemValue) => setEnable(itemValue)}
+        onValueChange={(itemValue) =>
+          setNewContact((prevContact) => ({
+            ...prevContact,
+            company_id: itemValue,
+          }))
+        }
       >
-        <Picker.Item label="Courses" value="courses" />
-        <Picker.Item label="Data-Structures" value="DSA" />
-        <Picker.Item label="ReactJs" value="react" />
-        <Picker.Item label="C++" value="cpp" />
-        <Picker.Item label="Python" value="py" />
-        <Picker.Item label="Java" value="java" />
+        {
+          companies &&
+            companies.map((company) => (
+              <Picker.Item
+                key={company.id}
+                label={company.name}
+                value={company.id}
+              />
+            ))
+          // .slice(0, 20) // Utilisez la méthode slice pour n'afficher que les 20 premières entreprises
+        }
       </Picker>
 
       <Button mode="outlined" onPress={handleReinit}>
