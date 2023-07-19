@@ -15,7 +15,7 @@ const ActiStackNavigator = () => {
         options={{ title: "Activities", headerShown: false }}
       />
       <ActiStack.Screen
-        name="SettingsScreen"
+        name="Settings"
         component={SettingsScreen}
         options={{ title: "SettingsScreen", headerShown: false }}
       />

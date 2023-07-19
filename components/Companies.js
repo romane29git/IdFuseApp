@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import companiesApi from "../api/companiesApi";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import SettingsIcon from "./SettingsIcon";
 
 const Companies = () => {
   const [companies, setCompanies] = useState(null);
@@ -126,6 +127,7 @@ const Companies = () => {
 
   return (
     <View style={styles.container}>
+      <SettingsIcon />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Liste des entreprises</Text>
         <View style={styles.buttonContainer}>

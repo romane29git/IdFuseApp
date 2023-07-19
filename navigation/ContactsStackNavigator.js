@@ -9,6 +9,7 @@ import Map from "../components/Map";
 import EditCompany from "../components/EditCompany";
 import EditContact from "../components/EditContact";
 import AddCompanies from "../components/AddCompanies";
+import SettingsScreen from "../screens/SettingsScreen";
 
 const ContactsStack = createStackNavigator();
 
@@ -53,10 +54,15 @@ const ContactsStackNavigator = () => {
         component={EditContact}
         options={{ title: "EditContact", headerShown: false }}
       />
-       <ContactsStack.Screen
+      <ContactsStack.Screen
         name="AddCompanies"
         component={AddCompanies}
         options={{ title: "AddCompanies", headerShown: false }}
+      />
+      <ContactsStack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: "SettingsScreen", headerShown: false }}
       />
     </ContactsStack.Navigator>
   );

@@ -6,6 +6,7 @@ import Company from "../components/Company";
 import Contact from "../components/Contact";
 import Campaign from "../components/Campaign";
 import List from "../components/List";
+import SettingsScreen from "../screens/SettingsScreen";
 
 const TodayStack = createStackNavigator();
 
@@ -36,6 +37,11 @@ const TodayStackNavigator = () => {
         name="List"
         component={List}
         options={{ title: "List" , headerShown: false}}
+      />
+       <TodayStack.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ title: "SettingsScreen", headerShown: false }}
       />
     </TodayStack.Navigator>
   );

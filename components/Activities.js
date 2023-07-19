@@ -4,9 +4,8 @@ import activitiesApi from "../api/activitiesApi";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Checkbox from "expo-checkbox";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import Button from "./Button";
-import SettingsScreen from "../screens/SettingsScreen";
 import { useNavigation } from "@react-navigation/native";
+import SettingsIcon from "./SettingsIcon";
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
@@ -80,9 +79,7 @@ const Activities = () => {
 
   return (
     <View style={styles.container}>
-      <Button onPress={() => navigation.navigate(SettingsScreen)}>
-        Paramètres
-      </Button>
+      <SettingsIcon/>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Liste des activités</Text>
       </View>

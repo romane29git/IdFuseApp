@@ -5,8 +5,6 @@ import Header from "../components/LoginHeader";
 import { View, Text, StyleSheet } from "react-native";
 import Button from "../components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
-import LoginScreen from "./LoginScreen";
 
 export default function SettingsScreen({ navigation }) {
   const [accessToken, setAccessToken] = useState(null);
