@@ -3,9 +3,14 @@ import React, { useState, useEffect } from "react";
 import activitiesApi from "../api/activitiesApi";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Checkbox from "expo-checkbox";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import Button from "./Button";
+import SettingsScreen from "../screens/SettingsScreen";
+import { useNavigation } from "@react-navigation/native";
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function fetchData() {
@@ -75,6 +80,9 @@ const Activities = () => {
 
   return (
     <View style={styles.container}>
+      <Button onPress={() => navigation.navigate(SettingsScreen)}>
+        Paramètres
+      </Button>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Liste des activités</Text>
       </View>
