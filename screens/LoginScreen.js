@@ -77,15 +77,19 @@ export default function LoginScreen({ navigation }) {
       console.log(response);
 
       const accessToken = response.api_token;
-      storeAccessToken(accessToken);
-      setIsLoggedIn(true);
-      setLoginError(false);
-      // Échec de la connexion
+      console.log(accessToken);
+      if (accessToken) {
+        storeAccessToken(accessToken);
+        setIsLoggedIn(true);
+        setLoginError(false);
+      } else {
+        // Échec de la connexion
+        setAccessToken(null);
+        setIsLoggedIn(false);
+        setLoginError(true);
+      }
     } catch (error) {
       console.log("Erreur lors de la connexion (login):", error);
-      setAccessToken(null);
-      setIsLoggedIn(false);
-      setLoginError(true);
     }
   };
 
