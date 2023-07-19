@@ -10,6 +10,7 @@ import BackButton from "../components/BackButton";
 import { theme } from "../core/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import RootTabNavigator from "../navigation/RootTabNavigator";
+import { loginApi } from "../api/loginApi";
 
 export default function LoginScreen({ navigation }) {
   const [accessToken, setAccessToken] = useState(null);
@@ -29,14 +30,14 @@ export default function LoginScreen({ navigation }) {
   const checkAccessToken = async () => {
     try {
       const storedAccessToken = await AsyncStorage.getItem("accessToken");
-      
+
       if (storedAccessToken) {
         setAccessToken(storedAccessToken);
         setIsLoggedIn(true);
-        console.log ('Utilisateur connecté');
+        console.log("Utilisateur connecté");
       } else {
         setIsLoggedIn(false);
-        console.log ('Utilisateur non connecté');
+        console.log("Utilisateur non connecté");
       }
     } catch (error) {
       console.log("Erreur lors de la vérification du token :", error);
@@ -72,30 +73,19 @@ export default function LoginScreen({ navigation }) {
   // Fonction pour se connecter et obtenir le token depuis l'API
   const login = async () => {
     try {
-      // Effectuer une requête à l'API pour obtenir le token
-      const response = await fetch(
-        "https://app.idfuse.fr/api/sso?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78&sso_user=democlients",
-        {
-          method: "GET",
-        }
-      );
+      const response = await loginApi(email, password);
+      console.log(response);
 
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        // Connexion réussie
-        const accessToken = data.accessToken;
-        storeAccessToken(accessToken);
-        setIsLoggedIn(true);
-        setLoginError(false);
-      } else {
-        // Échec de la connexion
-        setAccessToken(null);
-        setIsLoggedIn(false);
-        setLoginError(true);
-      }
+      const accessToken = response.api_token;
+      storeAccessToken(accessToken);
+      setIsLoggedIn(true);
+      setLoginError(false);
+      // Échec de la connexion
     } catch (error) {
-      console.log("Erreur lors de la connexion :", error);
+      console.log("Erreur lors de la connexion (login):", error);
+      setAccessToken(null);
+      setIsLoggedIn(false);
+      setLoginError(true);
     }
   };
 
