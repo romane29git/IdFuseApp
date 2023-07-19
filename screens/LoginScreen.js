@@ -19,6 +19,7 @@ export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
+  const [passwordOk, setPasswordOk] = useState(true);
 
   // Fonction pour vérifier si l'utilisateur est connecté au chargement de l'application
   useEffect(() => {
@@ -82,11 +83,13 @@ export default function LoginScreen({ navigation }) {
         storeAccessToken(accessToken);
         setIsLoggedIn(true);
         setLoginError(false);
+        setPasswordOk(true);
       } else {
         // Échec de la connexion
         setAccessToken(null);
         setIsLoggedIn(false);
         setLoginError(true);
+        setPasswordOk(false);
       }
     } catch (error) {
       console.log("Erreur lors de la connexion (login):", error);
@@ -129,6 +132,9 @@ export default function LoginScreen({ navigation }) {
           onChangeText={(text) => setPassword(text)}
           secureTextEntry
         />
+        {!passwordOk && (
+          <Text style={styles.errorText}>Mot de passe ou login incorrect</Text>
+        )}
         <View style={styles.forgotPassword}>
           <Text
             style={styles.forgot}
