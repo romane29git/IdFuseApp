@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
 import Header from "../components/LoginHeader";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Button from "../components/Button";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -24,6 +24,9 @@ export default function SettingsScreen({ navigation }) {
 
   return (
     <Background>
+      <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
+        <Text style={styles.closeButtonText}>Fermer</Text>
+      </TouchableOpacity>
       <Logo />
       <Header>Paramètres</Header>
       <Button onPress={removeAccessToken}>Déconnexion</Button>
@@ -36,5 +39,21 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 50,
     marginBottom: 30,
+  },
+  closeButton: {
+    position: "absolute",
+    top: 16,
+    right: 16,
+    backgroundColor: "#ccc",
+    borderRadius: 20,
+    padding: 8,
+    zIndex: 1,
+    elevation: 5,
+  },
+  closeButtonText: {
+    color: "#333",
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
