@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  Linking,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "react-native";
@@ -46,6 +47,14 @@ const Company = ({ route }) => {
 
   const handleEdit = (company) => {
     navigation.navigate("EditCompany", { id: company.id });
+  };
+
+  const handleOpenPDF = (number) => {
+    const pdfURL = `https://app.idfuse.fr/api/crm/invoices/${number}/download?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`;
+    console.log("coucou", number);
+    Linking.openURL(pdfURL).catch((error) =>
+      console.error("Erreur lors de l'ouverture du PDF", error)
+    );
   };
 
   const BubbleIcon = ({ iconName }) => {
@@ -121,7 +130,7 @@ const Company = ({ route }) => {
               <Text style={styles.contactText}>
                 Montant : {invoice.amount}€
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => handleOpenPDF(invoice.number)}>
                 <Icon name={"file-pdf"} size={28} color={"red"} />
               </TouchableOpacity>
               <View style={styles.paid}>
