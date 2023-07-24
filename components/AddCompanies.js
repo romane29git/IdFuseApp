@@ -1,11 +1,19 @@
-import { Text, View, TextInput, ScrollView } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import { companiesApiInstance, fetchCompanies } from "../api/addCompaniesApi";
 import addCompany from "../api/addCompaniesApi";
-import styles from "../theme/styles";
 import Button from "./Button";
 import Checkbox from "expo-checkbox";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import { useNavigation } from "@react-navigation/native";
 
 const AddCompanies = () => {
   const [companies, setCompanies] = useState([]);
@@ -19,6 +27,7 @@ const AddCompanies = () => {
     customer_address: "",
     registration_number: "",
   });
+  const navigation = useNavigation();
 
   const fetchData = async () => {
     try {
@@ -98,6 +107,15 @@ const AddCompanies = () => {
 
   return (
     <ScrollView style={styles.container}>
+      <TouchableOpacity
+        style={styles.buttonContainer}
+        onPress={() => navigation.goBack()}
+      >
+        <Image
+          source={require("../assets/arrow_back.png")}
+          style={styles.backArrow}
+        />
+      </TouchableOpacity>
       <TextInput
         style={styles.input}
         placeholder="Nom de l'entreprise"
@@ -198,3 +216,30 @@ const AddCompanies = () => {
 };
 
 export default AddCompanies;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#fff",
+  },
+  buttonContainer: {
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  backArrow: {
+    width: 20,
+    height: 20,
+    marginRight: 5,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 8,
+    fontSize: 16,
+    borderRadius: 4,
+    color: "#333",
+  },
+});
