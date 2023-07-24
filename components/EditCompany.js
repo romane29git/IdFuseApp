@@ -21,7 +21,6 @@ const EditCompany = ({ route }) => {
   const [street_number, setStreetNumber] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-  const [status, setStatus] = useState("");
   const [company, setCompany] = useState({});
   const navigation = useNavigation();
   const idCompany = route.params.id;
@@ -37,7 +36,6 @@ const EditCompany = ({ route }) => {
         setStreetNumber(fetchedCompany.street_number);
         setCity(fetchedCompany.city);
         setCountry(fetchedCompany.country);
-        setStatus(fetchedCompany.status);
       } catch (error) {
         console.log("Error fetching company data:", error);
       }
@@ -56,7 +54,6 @@ const EditCompany = ({ route }) => {
         city,
         country,
         idAddress: company.idAddress,
-        status,
       });
     } catch (error) {
       console.error(
@@ -83,14 +80,6 @@ const EditCompany = ({ route }) => {
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Nom :</Text>
         <TextInput value={name} onChangeText={setName} style={styles.input} />
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Statut :</Text>
-        <TextInput
-          value={status}
-          onChangeText={setStatus}
-          style={styles.input}
-        />
       </View>
       <View style={styles.inputContainer}>
         <Text style={styles.label}>Numéro de rue :</Text>
