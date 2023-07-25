@@ -1,4 +1,11 @@
-import { Text, View, TextInput, ScrollView, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import React, { useState, useEffect } from "react";
 import addContact from "../api/addContactApi";
 import styles from "../theme/styles";
@@ -6,6 +13,10 @@ import Button from "./Button";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { Picker } from "@react-native-picker/picker";
 import companiesApi from "../api/companiesApi";
+import { useNavigation } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
+const Tab = createMaterialTopTabNavigator();
 
 const AddContacts = () => {
   const [newContact, setNewContact] = useState({
@@ -104,8 +115,48 @@ const AddContacts = () => {
     fetchData(); // Appelez la fonction pour charger les entreprises
   }, []);
 
+  //search contact
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const navigation = useNavigation();
+
+  const handleSearch = async (value) => {
+    setSearchTerm(value);
+
+    if (value.length > 2) {
+      try {
+        const response = await fetch(
+          `https://app.idfuse.fr/api/search?q=${value}&api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`
+        );
+        const data = await response.json();
+
+        const filteredResults = data.result.filter((item) =>
+          item.name?.toLowerCase().includes(value.toLowerCase())
+        );
+        setSearchResults(filteredResults);
+      } catch (error) {
+        console.error("Erreur lors de la recherche :", error);
+      }
+    }
+  };
+
+  const handleClick = (item) => {
+    if (item.type === "contact") {
+      console.log("id : ", item.id, " name : ", item.name);
+    }
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => handleClick(item)}>
+        <Text style={styles.item}>{item.name}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Ajouter un contact</Text>
       <TextInput
         value={newContact.first_name}
@@ -166,13 +217,35 @@ const AddContacts = () => {
         }
       </Picker>
 
+      <TextInput
+        style={styles.input}
+        type="text"
+        value={searchTerm}
+        onChangeText={(value) => handleSearch(value)}
+      />
+      {searchResults.length > 0 && searchTerm.length >= 1 ? (
+        <Tab.Navigator>
+          <Tab.Screen name="Choisir un contact">
+            {() => (
+              <FlatList
+                data={searchResults.filter((item) => item.type === "contact")}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={renderItem}
+              />
+            )}
+          </Tab.Screen>
+        </Tab.Navigator>
+      ) : (
+        <Text>Aucun résultat trouvé.</Text>
+      )}
+
       <Button mode="outlined" onPress={handleReinit}>
         <Icon name="sync-alt" size={18} color="#5fabfe" />
       </Button>
       <Button mode="outlined" onPress={handleAddContact}>
         Ajouter
       </Button>
-    </ScrollView>
+    </View>
   );
 };
 
