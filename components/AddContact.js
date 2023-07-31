@@ -2,7 +2,6 @@ import {
   Text,
   View,
   TextInput,
-  ScrollView,
   FlatList,
   TouchableOpacity,
 } from "react-native";
