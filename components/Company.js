@@ -74,35 +74,36 @@ const Company = ({ route }) => {
     const contacts = company ? company.contacts : [];
 
     return (
-      <View style={styles.tabContainer}>
+      <ScrollView style={styles.tabContainer}>
         <Button mode="outlined" onPress={() => handleAttachContact(company)}>
           Ajouter
         </Button>
-        <ScrollView>
-          {contacts.length > 0 ? (
-            contacts.map((contact, index) => (
+        {contacts.length > 0 ? (
+          contacts.map((contact, index) => (
+            <TouchableOpacity
+              key={index}
+              style={styles.contactBox}
+              onPress={() => handlePress(contact)}
+            >
+              <View style={styles.contactContainer}>
+                <Text style={styles.contactText}>
+                  Prénom : {contact.firstName}
+                </Text>
+                <Text style={styles.contactText}>Nom : {contact.lastName}</Text>
+                <Text style={styles.contactText}>Email : {contact.email}</Text>
+              </View>
               <TouchableOpacity
-                key={index}
-                onPress={() => handlePress(contact)}
+                // onPress={() => handleDeleteContact(contact.id)}
+                style={styles.deleteButton}
               >
-                <View style={styles.contactContainer}>
-                  <Text style={styles.contactText}>
-                    Prénom : {contact.firstName}
-                  </Text>
-                  <Text style={styles.contactText}>
-                    Nom : {contact.lastName}
-                  </Text>
-                  <Text style={styles.contactText}>
-                    Email : {contact.email}
-                  </Text>
-                </View>
+                <Icon name="trash" size={18} color="#f35050" />
               </TouchableOpacity>
-            ))
-          ) : (
-            <Text>Aucun contact disponible</Text>
-          )}
-        </ScrollView>
-      </View>
+            </TouchableOpacity>
+          ))
+        ) : (
+          <Text>Aucun contact disponible</Text>
+        )}
+      </ScrollView>
     );
   };
 
@@ -346,7 +347,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   contactContainer: {
-    marginBottom: 16,
+    flex: 1,
     padding: 16,
     borderRadius: 8,
     backgroundColor: "#FFF",
@@ -439,7 +440,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-
   iconBadge: {
     position: "absolute",
     top: -8,
@@ -484,5 +484,19 @@ const styles = StyleSheet.create({
   paid: {
     justifyContent: "flex-end",
     flexDirection: "row",
+  },
+  deleteButton: {
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 10, 
+    borderWidth: 1,
+    borderColor: "#f35050",
+    marginLeft: 10,
+  },
+  contactBox: {
+    flexDirection: "row",
+    alignItems: "center", 
+    justifyContent: "space-between", 
+    marginBottom: 16, 
   },
 });
