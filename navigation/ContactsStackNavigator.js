@@ -11,6 +11,7 @@ import EditContact from "../components/EditContact";
 import AddCompanies from "../components/AddCompanies";
 import SettingsScreen from "../screens/SettingsScreen";
 import AttachContact from "../components/AttachContact";
+import AttachCompany from "../components/AttachCompany";
 
 const ContactsStack = createStackNavigator();
 
@@ -69,6 +70,11 @@ const ContactsStackNavigator = () => {
         name="AttachContact"
         component={AttachContact}
         options={{ title: "AttachContact", headerShown: false }}
+      />
+      <ContactsStack.Screen
+        name="AttachCompany"
+        component={AttachCompany}
+        options={{ title: "AttachCompany", headerShown: false }}
       />
     </ContactsStack.Navigator>
   );

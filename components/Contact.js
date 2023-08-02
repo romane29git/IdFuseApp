@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { Linking } from "react-native";
+import Button from "./Button";
 
 const Contact = () => {
   const [contact, setContact] = useState(null);
@@ -50,6 +51,11 @@ const Contact = () => {
     console.log(opportunity);
   };
 
+  const handleAttachCompany = () => {
+    console.log("coucou", id);
+    navigation.navigate("AttachCompany", { id: id });
+  };
+
   //envoi mail
   const sendEmail = (emailAddress) => {
     Linking.openURL(`mailto:${emailAddress}`);
@@ -76,10 +82,8 @@ const Contact = () => {
               <Text style={styles.title}>Mail</Text>
               {contact.contact.emails.map((contact, index) => (
                 <View key={index} style={styles.contactContainer}>
-                  <TouchableOpacity
-                    onPress={() => sendEmail(contact.mail)}
-                  >
-                  <Text style={styles.contactText}>{contact.mail}</Text>
+                  <TouchableOpacity onPress={() => sendEmail(contact.mail)}>
+                    <Text style={styles.contactText}>{contact.mail}</Text>
                   </TouchableOpacity>
                 </View>
               ))}
@@ -90,6 +94,12 @@ const Contact = () => {
             contact.contact.companies.length > 0 && (
               <>
                 <Text style={styles.title}>Entreprises</Text>
+                <Button
+                  mode="outlined"
+                  onPress={() => handleAttachCompany()}
+                >
+                  Ajouter
+                </Button>
                 {contact.contact.companies.map((company, index) => (
                   <TouchableOpacity
                     key={index}
