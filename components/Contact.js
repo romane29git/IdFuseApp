@@ -12,6 +12,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import { Linking } from "react-native";
 import Button from "./Button";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import detachContactApi from "../api/detachContactApi";
 
 const Contact = () => {
   const [contact, setContact] = useState(null);
@@ -52,8 +54,18 @@ const Contact = () => {
   };
 
   const handleAttachCompany = () => {
-    console.log("coucou", id);
     navigation.navigate("AttachCompany", { id: id });
+  };
+
+  const handleDetachCompany = async (companyId) => {
+    try {
+      await detachContactApi(id, companyId);
+    } catch (error) {
+      console.error(
+        "Une erreur s'est produite lors de la suppression du contact :",
+        error
+      );
+    }
   };
 
   //envoi mail
@@ -94,20 +106,24 @@ const Contact = () => {
             contact.contact.companies.length > 0 && (
               <>
                 <Text style={styles.title}>Entreprises</Text>
-                <Button
-                  mode="outlined"
-                  onPress={() => handleAttachCompany()}
-                >
+                <Button mode="outlined" onPress={() => handleAttachCompany()}>
                   Ajouter
                 </Button>
                 {contact.contact.companies.map((company, index) => (
                   <TouchableOpacity
                     key={index}
+                    style={styles.contactBox}
                     onPress={() => handlePressCompany(company)}
                   >
                     <View key={index} style={styles.contactContainer}>
                       <Text style={styles.contactText}>{company.name}</Text>
                     </View>
+                    <TouchableOpacity
+                      onPress={() => handleDetachCompany(company.id)}
+                      style={styles.deleteButton}
+                    >
+                      <Icon name="trash" size={18} color="#f35050" />
+                    </TouchableOpacity>
                   </TouchableOpacity>
                 ))}
               </>
@@ -169,6 +185,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   contactContainer: {
+    flex: 1,
     backgroundColor: "#f5f5f5",
     padding: 12,
     marginBottom: 8,
@@ -216,5 +233,19 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     marginRight: 5,
+  },
+  deleteButton: {
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#f35050",
+    marginLeft: 10,
+  },
+  contactBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
   },
 });
