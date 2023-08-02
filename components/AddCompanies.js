@@ -108,45 +108,6 @@ const AddCompanies = () => {
     }
   };
 
-  //search contact
-
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  const handleSearch = async (value) => {
-    setSearchTerm(value);
-
-    if (value.length > 2) {
-      try {
-        const response = await fetch(
-          `https://app.idfuse.fr/api/search?q=${value}&api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`
-        );
-        const data = await response.json();
-
-        const filteredResults = data.result.filter((item) =>
-          item.name?.toLowerCase().includes(value.toLowerCase())
-        );
-        setSearchResults(filteredResults);
-      } catch (error) {
-        console.error("Erreur lors de la recherche :", error);
-      }
-    }
-  };
-
-  const handleClick = (item) => {
-    if (item.type === "contact") {
-      console.log("id : ", item.id, " name : ", item.name);
-    }
-  };
-
-  const renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity onPress={() => handleClick(item)}>
-        <Text style={styles.item}>{item.name}</Text>
-      </TouchableOpacity>
-    );
-  };
-
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -239,28 +200,6 @@ const AddCompanies = () => {
           })
         }
       />
-
-      <TextInput
-        style={styles.input}
-        type="text"
-        value={searchTerm}
-        onChangeText={(value) => handleSearch(value)}
-      />
-      {searchResults.length > 0 && searchTerm.length >= 1 ? (
-        <Tab.Navigator>
-          <Tab.Screen name="Choisir un contact">
-            {() => (
-              <FlatList
-                data={searchResults.filter((item) => item.type === "contact")}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={renderItem}
-              />
-            )}
-          </Tab.Screen>
-        </Tab.Navigator>
-      ) : (
-        <Text>Aucun résultat trouvé.</Text>
-      )}
 
       <Button mode="outlined" onPress={handleReinit}>
         <Icon name="sync-alt" size={18} color="#5fabfe" />
