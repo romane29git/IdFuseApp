@@ -15,6 +15,7 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CompanyApi from "../api/companyApi";
 import Button from "./Button";
+import detachContactApi from "../api/detachContactApi";
 
 const companyApi = new CompanyApi();
 const Tab = createMaterialTopTabNavigator();
@@ -39,6 +40,7 @@ const Company = ({ route }) => {
   }, [companyId]);
 
   const handlePress = (contact) => {
+    console.log(contact.contactId);
     navigation.navigate("Contact", { id: contact.contactId });
   };
 
@@ -52,6 +54,19 @@ const Company = ({ route }) => {
 
   const handleAttachContact = (company) => {
     navigation.navigate("AttachContact", { id: company.id });
+  };
+
+  const handleDetachContact = async (contact) => {
+    console.log("id company : ", companyId);
+    console.log("id contact : ", contact.contactId);
+    try {
+      await detachContactApi(contact.contactId, companyId);
+    } catch (error) {
+      console.error(
+        "Une erreur s'est produite lors de la suppression du contact :",
+        error
+      );
+    }
   };
 
   const handleOpenPDF = (number) => {
@@ -93,7 +108,7 @@ const Company = ({ route }) => {
                 <Text style={styles.contactText}>Email : {contact.email}</Text>
               </View>
               <TouchableOpacity
-                // onPress={() => handleDeleteContact(contact.id)}
+                onPress={() => handleDetachContact(contact)}
                 style={styles.deleteButton}
               >
                 <Icon name="trash" size={18} color="#f35050" />
@@ -488,15 +503,15 @@ const styles = StyleSheet.create({
   deleteButton: {
     backgroundColor: "#fff",
     padding: 10,
-    borderRadius: 10, 
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: "#f35050",
     marginLeft: 10,
   },
   contactBox: {
     flexDirection: "row",
-    alignItems: "center", 
-    justifyContent: "space-between", 
-    marginBottom: 16, 
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 16,
   },
 });

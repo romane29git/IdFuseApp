@@ -17,9 +17,6 @@ const Tab = createMaterialTopTabNavigator();
 const AttachContact = ({ route }) => {
   const idCompany = route.params.id;
   const navigation = useNavigation();
-
-  //search contact
-
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
