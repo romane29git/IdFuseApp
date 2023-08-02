@@ -57,8 +57,6 @@ const Company = ({ route }) => {
   };
 
   const handleDetachContact = async (contact) => {
-    console.log("id company : ", companyId);
-    console.log("id contact : ", contact.contactId);
     try {
       await detachContactApi(contact.contactId, companyId);
     } catch (error) {
