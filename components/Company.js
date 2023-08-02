@@ -14,6 +14,7 @@ import Map from "../components/Map";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import CompanyApi from "../api/companyApi";
+import Button from "./Button";
 
 const companyApi = new CompanyApi();
 const Tab = createMaterialTopTabNavigator();
@@ -49,6 +50,10 @@ const Company = ({ route }) => {
     navigation.navigate("EditCompany", { id: company.id });
   };
 
+  const handleAttachContact = (company) => {
+    navigation.navigate("AttachContact", { id: company.id });
+  };
+
   const handleOpenPDF = (number) => {
     const pdfURL = `https://app.idfuse.fr/api/crm/invoices/${number}/download?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`;
     console.log("coucou", number);
@@ -69,23 +74,35 @@ const Company = ({ route }) => {
     const contacts = company ? company.contacts : [];
 
     return (
-      <ScrollView style={styles.tabContainer}>
-        {contacts.length > 0 ? (
-          contacts.map((contact, index) => (
-            <TouchableOpacity key={index} onPress={() => handlePress(contact)}>
-              <View style={styles.contactContainer}>
-                <Text style={styles.contactText}>
-                  Prénom : {contact.firstName}
-                </Text>
-                <Text style={styles.contactText}>Nom : {contact.lastName}</Text>
-                <Text style={styles.contactText}>Email : {contact.email}</Text>
-              </View>
-            </TouchableOpacity>
-          ))
-        ) : (
-          <Text>Aucun contact disponible</Text>
-        )}
-      </ScrollView>
+      <View style={styles.tabContainer}>
+        <Button mode="outlined" onPress={() => handleAttachContact(company)}>
+          Ajouter
+        </Button>
+        <ScrollView>
+          {contacts.length > 0 ? (
+            contacts.map((contact, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handlePress(contact)}
+              >
+                <View style={styles.contactContainer}>
+                  <Text style={styles.contactText}>
+                    Prénom : {contact.firstName}
+                  </Text>
+                  <Text style={styles.contactText}>
+                    Nom : {contact.lastName}
+                  </Text>
+                  <Text style={styles.contactText}>
+                    Email : {contact.email}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            ))
+          ) : (
+            <Text>Aucun contact disponible</Text>
+          )}
+        </ScrollView>
+      </View>
     );
   };
 
