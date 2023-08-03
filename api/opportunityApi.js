@@ -2,7 +2,7 @@ class OpportunityApi {
   async fetchOpportunityById(id) {
     try {
       const response = await fetch(
-        `https://app.idfuse.fr/api/crm/opportunity/${id}?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`
+        `https://app.idfuse.fr/api/crm/opportunity/${id}?api_token=${global.accessToken}`
       );
       const data = await response.json();
       return data;

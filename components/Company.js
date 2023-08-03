@@ -67,7 +67,7 @@ const Company = ({ route }) => {
   };
 
   const handleOpenPDF = (number) => {
-    const pdfURL = `https://app.idfuse.fr/api/crm/invoices/${number}/download?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`;
+    const pdfURL = `https://app.idfuse.fr/api/crm/invoices/${number}/download?api_token=${global.accessToken}`;
     Linking.openURL(pdfURL).catch((error) =>
       console.error("Erreur lors de l'ouverture du PDF", error)
     );

@@ -38,9 +38,7 @@ const RootTabNavigator = ({ accessToken }) => {
         <Tab.Screen name="Today" component={TodayStackNavigator} />
         <Tab.Screen name="Devis" component={DevisStackNavigator} />
         <Tab.Screen name="Activités" component={ActiStackNavigator} />
-        <Tab.Screen name="Contacts">
-          {() => <ContactsStackNavigator accessToken={accessToken} />}
-        </Tab.Screen>
+        <Tab.Screen name="Contacts" component={ContactsStackNavigator} />
       </Tab.Navigator>
     </>
   );

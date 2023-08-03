@@ -1,5 +1,5 @@
 export default async function detachContactApi(idContact, idCompany) {
-    const rootEndpoint = `https://app.idfuse.fr/api/crm/contact/${idContact}/detach/company/${idCompany}?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`;
+    const rootEndpoint = `https://app.idfuse.fr/api/crm/contact/${idContact}/detach/company/${idCompany}?api_token=${global.accessToken}`;
   
     const endpoint = rootEndpoint.replace("{idContact}", idContact);
     const endPoint = endpoint.replace("{idCompany}", idCompany);

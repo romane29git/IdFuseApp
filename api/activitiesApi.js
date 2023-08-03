@@ -1,8 +1,5 @@
 import axios from "axios";
 
-const rootEndpoint =
-  "https://app.idfuse.fr/api/activities?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78";
-
 export class Activity {
   constructor(
     id,
@@ -25,7 +22,9 @@ export class Activity {
 
 class activitiesApi {
   async fetchActivities() {
-    const response = await this.fetchFromApi(rootEndpoint);
+    const response = await this.fetchFromApi(
+      `https://app.idfuse.fr/api/activities?api_token=${global.accessToken}`
+    );
     if (response && typeof response === "object") {
       const activitiesData = response.activities;
       const activities = this.createActivities(activitiesData);
@@ -54,7 +53,7 @@ class activitiesApi {
       activity.duration,
       activity.date_start,
       activity.contactName,
-      activity.companyName,
+      activity.companyName
     );
   }
 

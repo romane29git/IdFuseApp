@@ -15,7 +15,6 @@ export class Company {
 
 class companiesApi {
   async fetchCompanies() {
-    console.log("coucou  ", global.accessToken);
 
     const response = await this.fetchFromApi(
       `https://app.idfuse.fr/api/crm/company/all?api_token=${global.accessToken}&api=1`

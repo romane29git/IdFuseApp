@@ -1,5 +1,5 @@
 const rootEndpoint =
-  "https://app.idfuse.fr/api/crm/company?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78";
+  `https://app.idfuse.fr/api/crm/company?api_token=${global.accessToken}`;
 
 export class Company {
   constructor(
@@ -137,7 +137,7 @@ class AddCompaniesApi {
 
   async updateCompany(id, updatedCompany) {
     const endpoint =
-      "https://app.idfuse.fr/api/crm/company/${id}?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78";
+      `https://app.idfuse.fr/api/crm/company/${id}?api_token=${global.accessToken}`;
     try {
       console.log(`Mise à jour de l'entreprise avec l'identifiant ${id}`);
       const response = await this.fetchFromApi(endpoint, "PUT", updatedCompany);

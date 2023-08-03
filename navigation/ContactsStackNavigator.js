@@ -15,7 +15,7 @@ import AttachCompany from "../components/AttachCompany";
 
 const ContactsStack = createStackNavigator();
 
-const ContactsStackNavigator = ({ accessToken }) => {
+const ContactsStackNavigator = () => {
   console.log("contact : ", accessToken);
   return (
     <ContactsStack.Navigator

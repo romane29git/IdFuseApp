@@ -36,57 +36,6 @@ export default function App() {
     }
   };
 
-  // Fonction pour stocker le token dans le stockage local
-  const storeAccessToken = async (token) => {
-    try {
-      await AsyncStorage.setItem("accessToken", token);
-      setAccessToken(token);
-    } catch (error) {
-      console.log("Erreur de stockage du token :", error);
-    }
-  };
-
-  // Fonction pour supprimer le token du stockage local
-  const removeAccessToken = async () => {
-    try {
-      await AsyncStorage.removeItem("accessToken");
-      setAccessToken(null);
-    } catch (error) {
-      console.log("Erreur lors de la suppression du token :", error);
-    }
-  };
-
-  // Fonction pour se connecter et obtenir le token depuis l'API
-  // const login = async () => {
-  //   try {
-  //     // Effectuer une requête à l'API pour obtenir le token
-  //     const response = await fetch(
-  //       "https://app.idfuse.fr/api/sso?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78&sso_user=democlients",
-  //       {
-  //         method: "GET",
-  //       }
-  //     );
-
-  //     const data = await response.json();
-
-  //     if (data.success === 1) {
-  //       const accessToken = data.sso_token;
-  //       storeAccessToken(accessToken);
-  //     } else {
-  //       console.log("Échec de la connexion :", data.result_message);
-  //       setAccessToken(null);
-  //     }
-  //   } catch (error) {
-  //     console.log("Erreur lors de la connexion :", error);
-  //   }
-  // };
-
-  // Fonction pour effectuer une action lorsque l'utilisateur est connecté
-  // const performActionWhenLoggedIn = () => {
-  //   // Effectuer l'action souhaitée lorsque l'utilisateur est connecté
-  //   console.log("Utilisateur connecté. Effectuer l'action souhaitée ici.");
-  // };
-
   if (isLoading) {
     // Afficher un indicateur de chargement pendant la vérification du jeton d'accès
     return (
@@ -95,49 +44,6 @@ export default function App() {
       </View>
     );
   }
-
-  // fonction pour effectuer une requête authentifiée à l'API en utilisant le token --> pas nécessaire
-  // const fetchData = async () => {
-  //   try {
-  //     const storedAccessToken = await AsyncStorage.getItem("accessToken");
-
-  //     if (storedAccessToken) {
-  //       const response = await fetch(
-  //         "https://app.idfuse.fr/api/sso?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78&sso_user=democlients",
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${storedAccessToken}`,
-  //           },
-  //         }
-  //       );
-
-  //       const data = await response.json();
-
-  //       console.log("Données récupérées :", data);
-  //     } else {
-  //       console.log("Aucun token trouvé. L'utilisateur n'est pas connecté.");
-  //     }
-  //   } catch (error) {
-  //     console.log("Erreur lors de la récupération des données :", error);
-  //   }
-  // };
-
-  // L'utilisateur est connecté, afficher la page d'accueil
-  // if (accessToken) {
-  //   return (
-  //     <View style={styles.container}>
-  //       <RootTabNavigator />
-  //       <Button title="Déconnexion" onPress={removeAccessToken} />
-  //     </View>
-  //   );
-  // } else {
-  //   return (
-  //     <View style={styles.container}>
-  //       <Button title="Se connecter" onPress={login} />
-  //       {/* <LoginScreen /> */}
-  //     </View>
-  //   );
-  // }
 
   return (
     <NavigationContainer>

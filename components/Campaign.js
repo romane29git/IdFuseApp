@@ -22,7 +22,7 @@ const Campaign = () => {
     const fetchCampaign = async () => {
       try {
         const response = await axios.get(
-          `https://app.idfuse.fr/api/campaign/report/total/${id}?api_token=ac781e5381ea80907e7f3b0aa5156cbc8eebf82957bf69c939829d9ee619ca78`
+          `https://app.idfuse.fr/api/campaign/report/total/${id}?api_token=${global.accessToken}`
         );
         const fetchedCampaign = response.data;
         setCampaign(fetchedCampaign);
