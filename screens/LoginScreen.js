@@ -23,14 +23,15 @@ export default function LoginScreen({ navigation }) {
 
   // Fonction pour vérifier si l'utilisateur est connecté au chargement de l'application
   useEffect(() => {
-    // checkAccessToken();
+    checkAccessToken();
     setIsLoading(false);
-  }, []);
+  }, [accessToken]);
 
   // Fonction pour vérifier si l'utilisateur a un token dans le stockage local
   const checkAccessToken = async () => {
     try {
       const storedAccessToken = await AsyncStorage.getItem("accessToken");
+      console.log("accesstoken : ", accessToken);
 
       if (storedAccessToken) {
         setAccessToken(storedAccessToken);
@@ -76,11 +77,9 @@ export default function LoginScreen({ navigation }) {
     try {
       const response = await loginApi(email, password);
       console.log(response);
-
-      const accessToken = response.api_token;
-      console.log(accessToken);
-      if (accessToken) {
-        storeAccessToken(accessToken);
+      const apiToken = response.api_token;
+      if (apiToken) {
+        storeAccessToken(apiToken);
         setIsLoggedIn(true);
         setLoginError(false);
         setPasswordOk(true);
