@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { TouchableOpacity, StyleSheet, View } from "react-native";
+import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
@@ -20,6 +20,7 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState(false);
   const [passwordOk, setPasswordOk] = useState(true);
+  global.accessToken = accessToken;
 
   // Fonction pour vérifier si l'utilisateur est connecté au chargement de l'application
   useEffect(() => {
@@ -106,7 +107,7 @@ export default function LoginScreen({ navigation }) {
 
   if (isLoggedIn) {
     // Utilisateur connecté, affiche l'interface principale de l'application
-    return <RootTabNavigator />;
+    return <RootTabNavigator accessToken={accessToken} />;
   } else {
     // L'utilisateur n'est pas connecté, affiche l'interface de connexion
     return (

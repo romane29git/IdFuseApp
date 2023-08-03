@@ -79,7 +79,7 @@ const Activities = () => {
 
   return (
     <View style={styles.container}>
-      <SettingsIcon/>
+      <SettingsIcon />
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Liste des activités</Text>
       </View>

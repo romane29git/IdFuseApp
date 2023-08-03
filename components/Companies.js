@@ -4,6 +4,7 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
+  SafeAreaView,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import companiesApi from "../api/companiesApi";

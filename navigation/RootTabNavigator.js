@@ -7,10 +7,10 @@ import DevisStackNavigator from "./DevisStackNavigator";
 import ActiStackNavigator from "./ActiStackNavigator";
 import ContactsStackNavigator from "./ContactsStackNavigator";
 
-
 const Tab = createBottomTabNavigator();
 
-const RootTabNavigator = () => {
+const RootTabNavigator = ({ accessToken }) => {
+  console.log("root ", accessToken);
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#5fabfe" />
@@ -38,7 +38,9 @@ const RootTabNavigator = () => {
         <Tab.Screen name="Today" component={TodayStackNavigator} />
         <Tab.Screen name="Devis" component={DevisStackNavigator} />
         <Tab.Screen name="Activités" component={ActiStackNavigator} />
-        <Tab.Screen name="Contacts" component={ContactsStackNavigator} />
+        <Tab.Screen name="Contacts">
+          {() => <ContactsStackNavigator accessToken={accessToken} />}
+        </Tab.Screen>
       </Tab.Navigator>
     </>
   );
