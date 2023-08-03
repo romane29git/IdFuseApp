@@ -7,9 +7,9 @@ export const loginApi = async (username, password) => {
     const response = await axios.get(API_URL, {
       params: { username, password },
     });
-    return response.data; // Renvoie les données de la réponse de l'API
+    return response.data;
   } catch (error) {
     console.error("Erreur lors de la connexion (api):", error);
-    throw error; // Lance l'erreur pour être gérée au niveau supérieur
+    throw error; 
   }
 };
