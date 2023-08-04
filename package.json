@@ -8,6 +8,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^18.0.1",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-community/checkbox": "^0.5.16",
     "@react-native-mapbox-gl/maps": "^8.6.0-beta.0",
@@ -24,6 +25,7 @@
     "expo-status-bar": "~1.4.4",
     "moment": "^2.29.4",
     "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-native": "0.71.8",
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "~2.9.0",
@@ -35,6 +37,7 @@
     "react-native-status-bar-height": "^2.6.0",
     "react-native-tab-view": "^3.5.2",
     "react-native-vector-icons": "^9.2.0",
+    "react-native-web": "~0.18.10",
     "react-navigation": "^4.4.4",
     "react-navigation-hooks": "^1.1.0"
   },
