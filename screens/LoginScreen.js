@@ -32,8 +32,7 @@ export default function LoginScreen({ navigation }) {
   const checkAccessToken = async () => {
     try {
       const storedAccessToken = await AsyncStorage.getItem("accessToken");
-      console.log("accesstoken : ", accessToken);
-
+      
       if (storedAccessToken) {
         setAccessToken(storedAccessToken);
         setIsLoggedIn(true);

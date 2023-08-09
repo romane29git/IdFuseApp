@@ -80,8 +80,6 @@ const AddContacts = () => {
         ],
       };
 
-      console.log("Données du contact :", contactData);
-
       await addContact(contactData);
 
       setNewContact({

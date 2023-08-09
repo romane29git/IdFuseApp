@@ -50,7 +50,6 @@ const Contact = () => {
 
   const handlePressOpp = (opportunity) => {
     navigation.navigate("Opportunity", { id: opportunity.id });
-    console.log(opportunity);
   };
 
   const handleAttachCompany = () => {

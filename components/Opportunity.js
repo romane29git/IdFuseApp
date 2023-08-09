@@ -25,7 +25,6 @@ const Opportunity = () => {
           `https://app.idfuse.fr/api/crm/opportunity/${id}?api_token=${global.accessToken}`
         );
         const fetchedOpportunity = response.data;
-        console.log("fetchedOpportunity:", fetchedOpportunity);
         setOpportunity(fetchedOpportunity);
       } catch (error) {
         console.error("Error fetching Opportunity:", error);

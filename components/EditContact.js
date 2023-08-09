@@ -54,7 +54,6 @@ const EditContact = ({ route }) => {
         last_name: updatedContact.last_name,
         mail: updatedContact.emails[0].mail,
       });
-      console.log("ok");
     } catch (error) {
       console.error(
         "Une erreur s'est produite lors de la modification de l'entreprise :",

@@ -10,7 +10,6 @@ import ContactsStackNavigator from "./ContactsStackNavigator";
 const Tab = createBottomTabNavigator();
 
 const RootTabNavigator = ({ accessToken }) => {
-  console.log("root ", accessToken);
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#5fabfe" />

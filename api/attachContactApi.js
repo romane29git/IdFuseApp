@@ -4,8 +4,6 @@ export default async function attachContactApi(idContact, idCompany) {
   const endpoint = rootEndpoint.replace("{idContact}", idContact);
   const endPoint = endpoint.replace("{idCompany}", idCompany);
 
-  console.log(endPoint);
-
   const response = await fetch(endPoint, {
     method: "PUT",
     headers: {

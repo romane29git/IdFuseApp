@@ -41,10 +41,6 @@ const AttachContact = ({ route }) => {
   };
 
   const handleClick = async (item) => {
-    if (item.type === "contact") {
-      console.log("id : ", item.id, " name : ", item.name);
-      console.log("id company :", idCompany);
-    }
     try {
       await attachContactApi(item.id,idCompany);
     } catch (error) {

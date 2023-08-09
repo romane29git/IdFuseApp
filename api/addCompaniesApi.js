@@ -39,8 +39,6 @@ export class Company {
 
 export default async function addCompany(newCompany) {
   try {
-    console.log("Données de l'entreprise à ajouter :", newCompany);
-
     const response = await fetch(rootEndpoint, {
       method: "POST",
       headers: {

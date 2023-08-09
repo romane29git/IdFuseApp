@@ -43,8 +43,6 @@ export class Contact {
 
 export default async function addContact(newContact) {
   try {
-    console.log("Données du contact à ajouter :", newContact);
-
     const response = await fetch(rootEndpoint, {
       method: "POST",
       headers: {

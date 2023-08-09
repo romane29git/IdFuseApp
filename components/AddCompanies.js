@@ -83,8 +83,6 @@ const AddCompanies = () => {
         registration_number: registration_number,
       };
 
-      console.log("Données de l'entreprise :", companyData);
-
       // Appeler la méthode pour ajouter une entreprise
       await addCompany(companyData);
 
