@@ -133,6 +133,7 @@ class AddCompaniesApi {
     }
   }
 
+  //modification d'une entreprise
   async updateCompany(id, updatedCompany) {
     const endpoint =
       `https://app.idfuse.fr/api/crm/company/${id}?api_token=${global.accessToken}`;

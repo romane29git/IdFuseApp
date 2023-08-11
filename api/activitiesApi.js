@@ -21,6 +21,7 @@ export class Activity {
 }
 
 class activitiesApi {
+  //fonction asynchrone qui récupère les données des activités
   async fetchActivities() {
     const response = await this.fetchFromApi(
       `https://app.idfuse.fr/api/activities?api_token=${global.accessToken}`
@@ -35,6 +36,7 @@ class activitiesApi {
     }
   }
 
+  //renvoie données de la réponse à la requête GET
   async fetchFromApi(query) {
     console.log(`Fetching API with query ${query}`);
     try {
@@ -45,6 +47,7 @@ class activitiesApi {
     }
   }
 
+  //création nouvelle activité
   createActivity(activity) {
     return new Activity(
       activity.id,
