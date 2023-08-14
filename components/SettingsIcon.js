@@ -21,8 +21,8 @@ export default function SettingsIcon() {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    top: -10,
-    left: 20,
+    top: 10,
+    left: 10,
   },
   iconContainer: {
     backgroundColor: "#4285F4",

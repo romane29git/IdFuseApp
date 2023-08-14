@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -10,6 +10,7 @@ import {
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import LanguageContext from '../LanguageContext';
 
 const CompanyIcon = ({ color }) => (
   <Icon name="building" size={20} color={color} />
@@ -39,6 +40,8 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const navigation = useNavigation();
+  const { t, setLanguage } = useContext(LanguageContext);
+
 
   const handleSearch = async (value) => {
     setSearchTerm(value);
@@ -201,7 +204,9 @@ const Search = () => {
           </Tab.Screen>
         </Tab.Navigator>
       ) : (
-        <Text>Aucun résultat trouvé.</Text>
+        <Text>
+          {t('no_result')}
+        </Text>
       )}
     </View>
   );

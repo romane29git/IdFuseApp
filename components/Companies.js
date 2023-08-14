@@ -285,6 +285,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 30
   },
   buttonContainer: {
     marginLeft: "auto",
