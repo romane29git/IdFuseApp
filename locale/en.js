@@ -5,4 +5,10 @@ export default {
   description: "This app helps to manage local translations",
   not_define: "No trad for this", 
   no_result: "No results found",
+  date: "Date",
+  duration: "Duration",
+  organization: "Organization",
+  contact: "Contact",
+  activity_list: "List of activities",
+
 }

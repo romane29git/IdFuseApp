@@ -1,15 +1,18 @@
 import { Text, View, FlatList, StyleSheet } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import activitiesApi from "../api/activitiesApi";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Checkbox from "expo-checkbox";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import SettingsIcon from "./SettingsIcon";
+import LanguageContext from '../LanguageContext';
 
 const Activities = () => {
   const [activities, setActivities] = useState([]);
   const navigation = useNavigation();
+  const { t, setLanguage } = useContext(LanguageContext);
+
 
   useEffect(() => {
     async function fetchData() {
@@ -57,21 +60,21 @@ const Activities = () => {
               item.type_event === "call"
                 ? "phone"
                 : item.type_event === "meeting"
-                ? "users"
-                : item.type_event === "mail"
-                ? "envelope"
-                : "tasks"
+                  ? "users"
+                  : item.type_event === "mail"
+                    ? "envelope"
+                    : "tasks"
             }
           />
           <Text style={styles.city}> {item.type_event}</Text>
         </View>
-        <Text style={styles.info}>Durée : {item.duration} minutes</Text>
-        <Text style={styles.info}>Date : {item.date_start}</Text>
+        <Text style={styles.info}>{t('duration')} : {item.duration} minutes</Text>
+        <Text style={styles.info}>{t('date')} : {item.date_start}</Text>
         <Text style={styles.info}>
-          {item.companyName ? `Organisation : ${item.companyName}` : null}
+          {item.companyName ? `${t('organization')} : ${item.companyName}` : null}
         </Text>
         <Text style={styles.info}>
-          {item.contactName ? `Contact : ${item.contactName}` : null}
+          {item.contactName ? `${t('contact')} : ${item.contactName}` : null}
         </Text>
       </View>
     );
@@ -81,7 +84,7 @@ const Activities = () => {
     <View style={styles.container}>
       <SettingsIcon />
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Liste des activités</Text>
+        <Text style={styles.title}>{t('activity_list')}</Text>
       </View>
       <FlatList
         data={activities}
