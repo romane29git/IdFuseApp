@@ -1,5 +1,4 @@
-const rootEndpoint =
-  `https://app.idfuse.fr/api/crm/company?api_token=${global.accessToken}`;
+const rootEndpoint = `https://app.idfuse.fr/api/crm/company?api_token=${global.accessToken}`;
 
 export class Company {
   constructor(
@@ -14,7 +13,7 @@ export class Company {
     effectif,
     secteur,
     produit,
-    registration_number, 
+    registration_number,
     solution_crm
   ) {
     this.id = id;
@@ -63,6 +62,7 @@ export default async function addCompany(newCompany) {
 }
 
 class AddCompaniesApi {
+  //récupère les entreprises de l'API
   async fetchCompanies() {
     const companies = await this.fetchFromApi(rootEndpoint);
 
@@ -74,6 +74,7 @@ class AddCompaniesApi {
     }
   }
 
+  //récupère les données de l'api
   async fetchFromApi(endpoint, method = "POST", body = null) {
     console.log(`Fetching API endpoint: ${endpoint}`);
     try {
@@ -95,6 +96,7 @@ class AddCompaniesApi {
     }
   }
 
+  //crée une nouvelle instance `Company`
   createCompany(company) {
     return new Company(
       company.id,
@@ -109,7 +111,7 @@ class AddCompaniesApi {
       company["Effectif entreprise"],
       company["Secteur activite"],
       company.registration_number,
-      company['Solution CRM actuelle'],
+      company["Solution CRM actuelle"]
     );
   }
 
@@ -122,6 +124,7 @@ class AddCompaniesApi {
     return companies.map((company) => this.createCompany(company));
   }
 
+  //récupère une entreprise spécifique par son identifiant
   async getCompanyById(id) {
     const endpoint = `${rootEndpoint}&id=${id}`;
     const company = await this.fetchFromApi(endpoint);
@@ -135,8 +138,7 @@ class AddCompaniesApi {
 
   //modification d'une entreprise
   async updateCompany(id, updatedCompany) {
-    const endpoint =
-      `https://app.idfuse.fr/api/crm/company/${id}?api_token=${global.accessToken}`;
+    const endpoint = `https://app.idfuse.fr/api/crm/company/${id}?api_token=${global.accessToken}`;
     try {
       console.log(`Mise à jour de l'entreprise avec l'identifiant ${id}`);
       const response = await this.fetchFromApi(endpoint, "PUT", updatedCompany);

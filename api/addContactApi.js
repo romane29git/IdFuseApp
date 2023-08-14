@@ -1,5 +1,4 @@
-const rootEndpoint =
-  `http://app.idfuse.fr/api/crm/contact/add?api_token=${global.accessToken}`;
+const rootEndpoint = `http://app.idfuse.fr/api/crm/contact/add?api_token=${global.accessToken}`;
 
 export class Contact {
   constructor(
@@ -67,6 +66,7 @@ export default async function addContact(newContact) {
 }
 
 class AddContactApi {
+  //récupère les contacts de l'API
   async fetchContact() {
     const contact = await this.fetchFromApi(rootEndpoint);
 
