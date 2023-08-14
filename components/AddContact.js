@@ -1,18 +1,10 @@
-import {
-  Text,
-  View,
-  TextInput,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { Text, View, TextInput } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import addContact from "../api/addContactApi";
 import styles from "../theme/styles";
 import Button from "./Button";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { Picker } from "@react-native-picker/picker";
 import companiesApi from "../api/companiesApi";
-import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import LanguageContext from "../LanguageContext";
 

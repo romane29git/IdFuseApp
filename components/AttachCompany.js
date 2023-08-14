@@ -5,11 +5,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  FlatList,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import attachContactApi from "../api/attachContactApi";
 import { Picker } from "@react-native-picker/picker";
 import companiesApi from "../api/companiesApi";

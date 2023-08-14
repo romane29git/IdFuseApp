@@ -7,11 +7,10 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
-import { companiesApiInstance, fetchCompanies } from "../api/addCompaniesApi";
+import React, { useState, useContext } from "react";
+import { companiesApiInstance } from "../api/addCompaniesApi";
 import addCompany from "../api/addCompaniesApi";
 import Button from "./Button";
-import Checkbox from "expo-checkbox";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";

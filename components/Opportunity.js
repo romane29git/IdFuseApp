@@ -9,7 +9,6 @@ import {
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
-import OpportunityApi from "../api/opportunityApi";
 import axios from "axios";
 import LanguageContext from "../LanguageContext";
 

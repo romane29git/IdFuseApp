@@ -7,7 +7,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import attachContactApi from "../api/attachContactApi";

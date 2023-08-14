@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import AgendaApi from "../api/agendaApi";
-import Icon from "react-native-vector-icons/FontAwesome5";
 import LanguageContext from "../LanguageContext";
 
 const agendaApi = new AgendaApi();

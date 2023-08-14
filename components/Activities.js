@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from "react";
 import activitiesApi from "../api/activitiesApi";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import Checkbox from "expo-checkbox";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import SettingsIcon from "./SettingsIcon";
 import LanguageContext from "../LanguageContext";
