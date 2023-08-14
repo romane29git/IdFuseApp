@@ -33,6 +33,7 @@ const Activities = () => {
       </View>
     );
   };
+
   const renderItem = ({ item }) => {
     const handleCheckboxChange = (isChecked) => {
       const index = activities.findIndex((activity) => activity.id === item.id);
@@ -42,6 +43,7 @@ const Activities = () => {
         setActivities(updatedActivities);
       }
     };
+
     return (
       <View style={styles.itemContainer}>
         <View style={styles.checkboxContainer}>

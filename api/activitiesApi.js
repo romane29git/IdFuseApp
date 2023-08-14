@@ -60,6 +60,7 @@ class activitiesApi {
     );
   }
 
+  //création d'un nouveau tableau d'activités 
   createActivities(activities) {
     if (!Array.isArray(activities)) {
       console.error("Invalid activities data");
