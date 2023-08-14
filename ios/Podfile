@@ -87,4 +87,5 @@ target 'firstapp' do
       Pod::UI.warn e
     end
   end
+pod 'Mapbox-iOS-SDK'
 end
