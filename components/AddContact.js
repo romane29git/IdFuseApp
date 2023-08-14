@@ -5,7 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import addContact from "../api/addContactApi";
 import styles from "../theme/styles";
 import Button from "./Button";
@@ -14,6 +14,7 @@ import { Picker } from "@react-native-picker/picker";
 import companiesApi from "../api/companiesApi";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import LanguageContext from "../LanguageContext";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -29,6 +30,7 @@ const AddContacts = () => {
     email: "",
   });
   const [companies, setCompanies] = useState([{ id: "", name: "Aucune" }]);
+  const { t, setLanguage } = useContext(LanguageContext);
 
   const handleReinit = () => {
     setNewContact({
@@ -111,10 +113,10 @@ const AddContacts = () => {
 
     fetchData(); // Appelez la fonction pour charger les entreprises
   }, []);
-  
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Ajouter un contact</Text>
+      <Text style={styles.title}>{t("add_contact")}</Text>
       <TextInput
         value={newContact.first_name}
         onChangeText={(text) =>
@@ -123,7 +125,7 @@ const AddContacts = () => {
             first_name: text,
           }))
         }
-        placeholder="Prénom"
+        placeholder={t("firstname")}
         style={styles.input}
       />
       <TextInput
@@ -134,7 +136,7 @@ const AddContacts = () => {
             last_name: text,
           }))
         }
-        placeholder="Nom"
+        placeholder={t("lastname")}
         style={styles.input}
       />
 
@@ -146,7 +148,7 @@ const AddContacts = () => {
             email: text,
           }))
         }
-        placeholder="Email"
+        placeholder={t("email")}
         style={styles.input}
       />
 
@@ -154,7 +156,7 @@ const AddContacts = () => {
         <Icon name="sync-alt" size={18} color="#5fabfe" />
       </Button>
       <Button mode="outlined" onPress={handleAddContact}>
-        Ajouter
+        {t("add")}
       </Button>
     </View>
   );

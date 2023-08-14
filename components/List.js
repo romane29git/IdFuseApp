@@ -6,10 +6,11 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
+import LanguageContext from "../LanguageContext";
 
 const List = () => {
   const [list, setList] = useState(null);
@@ -17,6 +18,7 @@ const List = () => {
   const id = route.params.id;
   const name = route.params.name;
   const navigation = useNavigation();
+  const { t, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchList = async () => {
@@ -50,7 +52,9 @@ const List = () => {
         Object.values(list.fields).map((field, index) => {
           return (
             <View key={index}>
-              <Text style={styles.contactText}>Titre : {field.title}</Text>
+              <Text style={styles.contactText}>
+                {t("title")} : {field.title}
+              </Text>
               <Text style={styles.contactText}>Type : {field.type}</Text>
               <Text style={styles.fieldText}>Tag : {field.tag}</Text>
             </View>

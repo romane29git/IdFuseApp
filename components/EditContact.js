@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -11,37 +11,17 @@ import { Contact, editContactApi } from "../api/editContactApi";
 import { useNavigation } from "@react-navigation/native";
 import { Image } from "react-native";
 import { ScrollView } from "react-native";
+import LanguageContext from "../LanguageContext";
 
 const EditContact = ({ route }) => {
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [mail, setMail] = useState("");
+  const { t, setLanguage } = useContext(LanguageContext);
 
   const [contact, setContact] = useState({});
   const navigation = useNavigation();
   const idContact = 13;
-
-  //   useEffect(() => {
-  //     async function fetchCompanyDetails() {
-  //       try {
-  //         const fetchedCompany = await companyApi.getCompanyById(idContact);
-  //         setCompany(fetchedCompany);
-
-  //         console.log(fetchedCompany);
-
-  //         setName(fetchedCompany.name);
-  //         setStreet(fetchedCompany.street);
-  //         setStreetNumber(fetchedCompany.street_number);
-  //         setCity(fetchedCompany.city);
-  //         setCountry(fetchedCompany.country);
-  //         setStatus(fetchedCompany.status);
-  //       } catch (error) {
-  //         console.log("Error fetching company data:", error);
-  //       }
-  //     }
-
-  //     fetchCompanyDetails();
-  //   }, [idContact]);
 
   const handleSubmit = async () => {
     const updatedContact = new Contact(idContact, first_name, last_name, mail);
@@ -73,10 +53,10 @@ const EditContact = ({ route }) => {
           style={styles.backArrow}
         />
       </TouchableOpacity>
-      <Text>Modifier contact</Text>
+      <Text>{t("udpateContact")}</Text>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Nom :</Text>
+        <Text style={styles.label}>{t("lastname")} :</Text>
         <TextInput
           value={last_name}
           onChangeText={setLastName}
@@ -85,7 +65,7 @@ const EditContact = ({ route }) => {
       </View>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Prénom :</Text>
+        <Text style={styles.label}>{t("firstname")} :</Text>
         <TextInput
           value={first_name}
           onChangeText={setFirstName}
@@ -94,11 +74,11 @@ const EditContact = ({ route }) => {
       </View>
 
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Mail :</Text>
+        <Text style={styles.label}>{t("email")} :</Text>
         <TextInput value={mail} onChangeText={setMail} style={styles.input} />
       </View>
 
-      <Button title="Modifier" onPress={handleSubmit} />
+      <Button title={t("lastname")} onPress={handleSubmit} />
     </ScrollView>
   );
 };

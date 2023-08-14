@@ -7,7 +7,7 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { companiesApiInstance, fetchCompanies } from "../api/addCompaniesApi";
 import addCompany from "../api/addCompaniesApi";
 import Button from "./Button";
@@ -15,6 +15,7 @@ import Checkbox from "expo-checkbox";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import LanguageContext from "../LanguageContext";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -31,6 +32,7 @@ const AddCompanies = () => {
     registration_number: "",
   });
   const navigation = useNavigation();
+  const { t, setLanguage } = useContext(LanguageContext);
 
   const fetchData = async () => {
     try {
@@ -119,7 +121,7 @@ const AddCompanies = () => {
       </TouchableOpacity>
       <TextInput
         style={styles.input}
-        placeholder="Nom de l'entreprise"
+        placeholder={t("company_name")}
         value={newCompany.name}
         onChangeText={(text) =>
           setNewCompany({
@@ -130,7 +132,7 @@ const AddCompanies = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Numéro de rue"
+        placeholder={t("street_number")}
         value={newCompany.street_number}
         onChangeText={(text) =>
           setNewCompany({
@@ -141,7 +143,7 @@ const AddCompanies = () => {
       />
       <TextInput
         style={styles.input}
-        placeholder="Rue"
+        placeholder={t("street")}
         value={newCompany.street}
         onChangeText={(text) =>
           setNewCompany({
@@ -153,7 +155,7 @@ const AddCompanies = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Ville"
+        placeholder={t("city")}
         value={newCompany.city}
         onChangeText={(text) =>
           setNewCompany({
@@ -165,7 +167,7 @@ const AddCompanies = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Code postal"
+        placeholder={t("postal_code")}
         value={newCompany.postal_code}
         onChangeText={(text) =>
           setNewCompany({
@@ -177,7 +179,7 @@ const AddCompanies = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="Pays"
+        placeholder={t("country")}
         value={newCompany.country}
         onChangeText={(text) =>
           setNewCompany({
@@ -189,7 +191,7 @@ const AddCompanies = () => {
 
       <TextInput
         style={styles.input}
-        placeholder="N° SIREN"
+        placeholder={t("siren_no")}
         value={newCompany.registration_number}
         onChangeText={(text) =>
           setNewCompany({
@@ -204,7 +206,7 @@ const AddCompanies = () => {
       </Button>
 
       <Button mode="outlined" onPress={handleAddCompany}>
-        Ajouter
+        {t("add")}
       </Button>
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Image } from "react-native";
 import CompanyApi from "../api/companyApi";
 import { ScrollView } from "react-native";
+import LanguageContext from "../LanguageContext";
 
 const companyApi = new CompanyApi();
 
@@ -24,6 +25,7 @@ const EditCompany = ({ route }) => {
   const [company, setCompany] = useState({});
   const navigation = useNavigation();
   const idCompany = route.params.id;
+  const { t, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     async function fetchCompanyDetails() {
@@ -75,14 +77,17 @@ const EditCompany = ({ route }) => {
         />
       </TouchableOpacity>
       <View style={styles.headingContainer}>
-        <Text style={styles.headingText}>Modifier {company.name}</Text>
+        <Text style={styles.headingText}>
+          {t("update")}
+          {company.name}
+        </Text>
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Nom :</Text>
+        <Text style={styles.label}>{t("name")}:</Text>
         <TextInput value={name} onChangeText={setName} style={styles.input} />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Numéro de rue :</Text>
+        <Text style={styles.label}>{t("street_no")} :</Text>
         <TextInput
           value={street_number}
           onChangeText={setStreetNumber}
@@ -90,7 +95,7 @@ const EditCompany = ({ route }) => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Rue :</Text>
+        <Text style={styles.label}>{t("street")}:</Text>
         <TextInput
           value={street}
           onChangeText={setStreet}
@@ -98,11 +103,11 @@ const EditCompany = ({ route }) => {
         />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Ville :</Text>
+        <Text style={styles.label}>{t("city")}:</Text>
         <TextInput value={city} onChangeText={setCity} style={styles.input} />
       </View>
       <View style={styles.inputContainer}>
-        <Text style={styles.label}>Pays :</Text>
+        <Text style={styles.label}>{t("country")}:</Text>
         <TextInput
           value={country}
           onChangeText={setCountry}
@@ -110,7 +115,7 @@ const EditCompany = ({ route }) => {
         />
       </View>
       <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-        <Text style={styles.buttonText}>Modifier</Text>
+        <Text style={styles.buttonText}>{t("update")}</Text>
       </TouchableOpacity>
     </ScrollView>
   );

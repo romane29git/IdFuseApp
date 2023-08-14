@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Button from "../components/Button";
 import { Card } from "react-native-elements";
 import { View, Text, ScrollView, StyleSheet } from "react-native";
 import moment from "moment";
 import "moment/locale/fr";
 import companiesApi from "../api/companiesApi";
+import LanguageContext from "../LanguageContext";
 
 export default function Dashboard({ navigation }) {
   const [companyCount, setCompanyCount] = useState(0);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const { t, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     fetchCompanyData();
@@ -39,7 +41,7 @@ export default function Dashboard({ navigation }) {
       <ScrollView>
         <Card>
           <View style={styles.cardView}>
-            <Text style={styles.cardTitle}>Nombre d'entreprises</Text>
+            <Text style={styles.cardTitle}>{t("nb_companies")}</Text>
             <Text style={styles.cardSubtitle}>{formatLastUpdated()}</Text>
           </View>
           <Card.Divider />
@@ -48,21 +50,13 @@ export default function Dashboard({ navigation }) {
 
         <Card>
           <View style={styles.cardView}>
-            <Text style={styles.cardTitle}>Nombre de factures</Text>
+            <Text style={styles.cardTitle}>{t("nb_invoices")}</Text>
             <Text style={styles.cardSubtitle}>{formatLastUpdated()}</Text>
           </View>
           <Card.Divider />
           <Text>nb factures</Text>
         </Card>
 
-        <Card>
-          <View style={styles.cardView}>
-            <Text style={styles.cardTitle}>Nombre de factures</Text>
-            <Text style={styles.cardSubtitle}>{formatLastUpdated()}</Text>
-          </View>
-          <Card.Divider />
-          <Text>nb factures</Text>
-        </Card>
       </ScrollView>
     </View>
   );

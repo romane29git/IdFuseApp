@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import Background from "../components/Background";
 import Logo from "../components/Logo";
 import Header from "../components/LoginHeader";
 import Button from "../components/Button";
 import Paragraph from "../components/Paragraph";
+import LanguageContext from '../LanguageContext';
 
 export default function StartScreen({ navigation }) {
+  const { t, setLanguage } = useContext(LanguageContext);
+
   return (
     <Background>
       <Logo />
@@ -17,13 +20,13 @@ export default function StartScreen({ navigation }) {
         mode="contained"
         onPress={() => navigation.navigate("LoginScreen")}
       >
-        Login
+        {t('login')}
       </Button>
       <Button
         mode="outlined"
         onPress={() => navigation.navigate("RegisterScreen")}
       >
-        Sign Up
+        {t('signup')}
       </Button>
     </Background>
   );

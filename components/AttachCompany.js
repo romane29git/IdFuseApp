@@ -7,17 +7,19 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import attachContactApi from "../api/attachContactApi";
 import { Picker } from "@react-native-picker/picker";
 import companiesApi from "../api/companiesApi";
 import Button from "./Button";
+import LanguageContext from "../LanguageContext";
 
 const AttachCompany = ({ route }) => {
   const idContact = route.params.id;
   const navigation = useNavigation();
+  const { t, setLanguage } = useContext(LanguageContext);
 
   const [selectedCompanyId, setSelectedCompanyId] = useState(null);
   const [companies, setCompanies] = useState([]);
@@ -58,7 +60,7 @@ const AttachCompany = ({ route }) => {
           style={styles.backArrow}
         />
       </TouchableOpacity>
-      <Text>Ajouter une entreprise au contact</Text>
+      <Text>{t("add_company_to_contact")}</Text>
 
       <Picker
         selectedValue={selectedCompanyId}
@@ -76,7 +78,7 @@ const AttachCompany = ({ route }) => {
           ))}
       </Picker>
       <Button mode="outlined" onPress={handleClick}>
-        Ajouter
+        {t("add")}
       </Button>
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { TouchableOpacity, StyleSheet, View, SafeAreaView } from "react-native";
 import { Text } from "react-native-paper";
 import Background from "../components/Background";
@@ -11,6 +11,7 @@ import { theme } from "../core/theme";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import RootTabNavigator from "../navigation/RootTabNavigator";
 import { loginApi } from "../api/loginApi";
+import LanguageContext from "../LanguageContext";
 
 export default function LoginScreen({ navigation }) {
   const [accessToken, setAccessToken] = useState(null);
@@ -21,6 +22,7 @@ export default function LoginScreen({ navigation }) {
   const [loginError, setLoginError] = useState(false);
   const [passwordOk, setPasswordOk] = useState(true);
   global.accessToken = accessToken;
+  const { t, setLanguage } = useContext(LanguageContext);
 
   // Fonction pour vérifier si l'utilisateur est connecté au chargement de l'application
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function LoginScreen({ navigation }) {
   const checkAccessToken = async () => {
     try {
       const storedAccessToken = await AsyncStorage.getItem("accessToken");
-      
+
       if (storedAccessToken) {
         setAccessToken(storedAccessToken);
         setIsLoggedIn(true);
@@ -99,7 +101,7 @@ export default function LoginScreen({ navigation }) {
     // Afficher un indicateur de chargement pendant la vérification du token
     return (
       <View style={styles.container}>
-        <Text>Chargement...</Text>
+        <Text>{t("loading")}</Text>
       </View>
     );
   }
@@ -113,7 +115,7 @@ export default function LoginScreen({ navigation }) {
       <Background>
         <BackButton goBack={() => navigation.goBack()} />
         <Logo />
-        <Header>Welcome back.</Header>
+        <Header>{t("welcome_back")}</Header>
         <TextInput
           label="Email"
           returnKeyType="next"
@@ -132,25 +134,25 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry
         />
         {!passwordOk && (
-          <Text style={styles.errorText}>Mot de passe ou login incorrect</Text>
+          <Text style={styles.errorText}>{t("login_invalid")}</Text>
         )}
         <View style={styles.forgotPassword}>
           <Text
             style={styles.forgot}
             onPress={() => navigation.navigate("ResetPasswordScreen")}
           >
-            Forgot your password?
+            {t("forgot_pwd")}
           </Text>
         </View>
         <Button mode="contained" onPress={login}>
-          <Text>Login</Text>
+          <Text>{t("login")}</Text>
         </Button>
         <View style={styles.row}>
-          <Text>Don’t have an account? </Text>
+          <Text> {t("have_account")}</Text>
           <TouchableOpacity
             onPress={() => navigation.replace("RegisterScreen")}
           >
-            <Text style={styles.link}>Sign up</Text>
+            <Text style={styles.link}>{t('signup')}</Text>
           </TouchableOpacity>
         </View>
       </Background>

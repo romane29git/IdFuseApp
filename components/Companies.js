@@ -6,16 +6,18 @@ import {
   StyleSheet,
   SafeAreaView,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import companiesApi from "../api/companiesApi";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SettingsIcon from "./SettingsIcon";
+import LanguageContext from '../LanguageContext';
 
 const Companies = () => {
   const [companies, setCompanies] = useState(null);
   const navigation = useNavigation();
   const [filter, setFilter] = useState(null);
+  const { t, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -75,9 +77,9 @@ const Companies = () => {
         <Text style={styles.city}>
           {item.postal_code} - {item.city}
         </Text>
-        <Text style={styles.info}>Produits : {item.produit}</Text>
+        <Text style={styles.info}>{t("product")} : {item.produit}</Text>
         <Text style={styles.info}>
-          Effectif de l'entreprise : {item.effectif}
+          {t('employees_nb')} : {item.effectif}
         </Text>
         <Text style={styles.info}>
           {item.statut === "customer" ? (
@@ -130,10 +132,10 @@ const Companies = () => {
     <View style={styles.container}>
       <SettingsIcon />
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Liste des entreprises</Text>
+        <Text style={styles.title}>{t("companies_list")}</Text>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={() => handleAdd()}>
-            <Text style={styles.buttonText}>Ajouter</Text>
+            <Text style={styles.buttonText}>{t("add")}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -141,7 +143,7 @@ const Companies = () => {
       <View style={styles.filterContainer}>
         <TouchableOpacity>
           <View style={styles.filterItem}>
-            <Text style={styles.filterText}>Nom</Text>
+            <Text style={styles.filterText}>{t("name")}</Text>
             <View style={styles.arrowContainer}>
               <TouchableOpacity onPress={handleAlphaAscFilter}>
                 <MaterialCommunityIcons
@@ -161,7 +163,7 @@ const Companies = () => {
 
         <TouchableOpacity>
           <View style={styles.filterItem}>
-            <Text style={styles.filterText}>Statut</Text>
+            <Text style={styles.filterText}>{t("status")}</Text>
             <View style={styles.arrowContainer}>
               <TouchableOpacity onPress={handleStatutAscFilter}>
                 <MaterialCommunityIcons
@@ -181,7 +183,7 @@ const Companies = () => {
 
         <TouchableOpacity>
           <View style={styles.filterItem}>
-            <Text style={styles.filterText}>Ville</Text>
+            <Text style={styles.filterText}>{t("city")}</Text>
             <View style={styles.arrowContainer}>
               <TouchableOpacity onPress={handleCityAscFilter}>
                 <MaterialCommunityIcons

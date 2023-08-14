@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import LanguageContext from "../LanguageContext";
 
 function Calendar() {
   const currentDate = new Date();
@@ -17,11 +18,12 @@ function Calendar() {
   };
 
   const daysInMonth = getDaysInMonth(currentYear, currentMonth);
+  const { t, setLanguage } = useContext(LanguageContext);
 
   return (
     <View style={styles.calendarContainer}>
       <Text style={styles.calendarHeader}>
-        Calendrier {currentMonth + 1}/{currentYear}
+        {t("calendar")} {currentMonth + 1}/{currentYear}
       </Text>
       <View style={styles.calendarGrid}>
         {daysInMonth.map((day, index) => (
@@ -35,30 +37,30 @@ function Calendar() {
 }
 
 const styles = StyleSheet.create({
-    calendarContainer: {
-      marginVertical: 20,
-      paddingHorizontal: 20,
-    },
-    calendarHeader: {
-      fontSize: 18,
-      fontWeight: "bold",
-      marginBottom: 10,
-    },
-    calendarGrid: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-    },
-    calendarDay: {
-      width: "14.28%", 
-      aspectRatio: 1, 
-      justifyContent: "center",
-      alignItems: "center",
-      borderWidth: 1,
-      borderColor: "gray",
-    },
-    calendarDayText: {
-      fontSize: 16,
-    },
-  });
+  calendarContainer: {
+    marginVertical: 20,
+    paddingHorizontal: 20,
+  },
+  calendarHeader: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+  },
+  calendarGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  calendarDay: {
+    width: "14.28%",
+    aspectRatio: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "gray",
+  },
+  calendarDayText: {
+    fontSize: 16,
+  },
+});
 
 export default Calendar;

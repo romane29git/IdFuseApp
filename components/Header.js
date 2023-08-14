@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
+import LanguageContext from "../LanguageContext";
 
 const Header = () => {
+  const { t, setLanguage } = useContext(LanguageContext);
+
   return (
     <View style={styles.container}>
       <Image
@@ -9,7 +12,7 @@ const Header = () => {
         style={styles.logo}
         resizeMode="contain"
       />
-      <Text style={styles.title}>Bienvenue sur notre application</Text>
+      <Text style={styles.title}>{t("welcome")}</Text>
     </View>
   );
 };

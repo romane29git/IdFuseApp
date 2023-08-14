@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import AgendaApi from "../api/agendaApi";
 import Icon from "react-native-vector-icons/FontAwesome5";
+import LanguageContext from "../LanguageContext";
 
 const agendaApi = new AgendaApi();
 
@@ -9,6 +10,7 @@ const Agenda = () => {
   const [todayEvents, setTodayEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
   const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const { t, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     async function fetchEvents() {
@@ -50,38 +52,44 @@ const Agenda = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Agenda</Text>
-      <Text style={styles.sectionTitle}>Événements aujourd'hui</Text>
+      <Text style={styles.title}>{t("agenda")}</Text>
+      <Text style={styles.sectionTitle}>{t("event_today")}</Text>
       {todayEvents.length > 0 ? (
         todayEvents.map((event, index) => (
           <View style={styles.eventContainer} key={index}>
-            <Text style={styles.eventName}>Event Name: {event.title}</Text>
+            <Text style={styles.eventName}>
+              {t("event_name")}: {event.title}
+            </Text>
           </View>
         ))
       ) : (
-        <Text>No events today</Text>
+        <Text>{t("no_event_today")}</Text>
       )}
 
-      <Text style={styles.sectionTitle}>Événements à venir</Text>
+      <Text style={styles.sectionTitle}>{t("event_upcoming")}</Text>
       {upcomingEvents.length > 0 ? (
         upcomingEvents.map((event, index) => (
           <View style={styles.eventContainer} key={index}>
-            <Text style={styles.eventName}>Event : {event.title}</Text>
+            <Text style={styles.eventName}>
+              {t("event_name")} : {event.title}
+            </Text>
           </View>
         ))
       ) : (
-        <Text>No upcoming events</Text>
+        <Text>{t("no_event_upcoming")}</Text>
       )}
 
-      <Text style={styles.sectionTitle}>Événements passés</Text>
+      <Text style={styles.sectionTitle}>{t("event_past")}</Text>
       {pastEvents.length > 0 ? (
         pastEvents.map((event, index) => (
           <View style={styles.eventContainer} key={index}>
-            <Text style={styles.eventName}>Event : {event.title}</Text>
+            <Text style={styles.eventName}>
+              {t("event_name")} : {event.title}
+            </Text>
           </View>
         ))
       ) : (
-        <Text>No past events</Text>
+        <Text>{t("no_event_past")} </Text>
       )}
     </View>
   );

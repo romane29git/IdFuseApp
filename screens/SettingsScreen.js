@@ -12,7 +12,6 @@ export default function SettingsScreen({ navigation }) {
   const [accessToken, setAccessToken] = useState(null);
   const { t, setLanguage } = useContext(LanguageContext);
 
-
   const removeAccessToken = async () => {
     try {
       await AsyncStorage.removeItem("accessToken");
@@ -29,14 +28,14 @@ export default function SettingsScreen({ navigation }) {
   return (
     <Background>
       <TouchableOpacity style={styles.closeButton} onPress={() => navigation.goBack()}>
-        <Text style={styles.closeButtonText}>Fermer</Text>
+        <Text style={styles.closeButtonText}>{t('close')}</Text>
       </TouchableOpacity>
       <Text>
         {t('title')}
       </Text>
       <Logo />
       <Header>Paramètres</Header>
-      <Button onPress={removeAccessToken}>Déconnexion</Button>
+      <Button onPress={removeAccessToken}>{t('logout')}</Button>
       <Button onPress={() => setLanguage('en')}>English</Button>
       <Button onPress={() => setLanguage('fr')}>Français</Button>
     </Background>

@@ -6,17 +6,19 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
 import OpportunityApi from "../api/opportunityApi";
 import axios from "axios";
+import LanguageContext from "../LanguageContext";
 
 const Opportunity = () => {
   const [opportunity, setOpportunity] = useState(null);
   const route = useRoute();
   const id = route.params.id;
   const navigation = useNavigation();
+  const { t, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchOpportunity = async () => {
@@ -57,16 +59,16 @@ const Opportunity = () => {
           <Text style={styles.sectionTitle}>{opportunity.pipeline.name}</Text>
           <Text style={styles.subtitle}>{opportunity.pipeline.status}</Text>
           <Text style={styles.text}>
-            Date : {opportunity.pipeline.created_at}
+            {t("date")} : {opportunity.pipeline.created_at}
           </Text>
           <Text style={styles.text}>
-            Montant : {opportunity.pipeline.amount} €
+          {t("amount")} : {opportunity.pipeline.amount} €
           </Text>
           <Text style={styles.text}>
-            Date de clôture : {opportunity.pipeline.closed_at}
+          {t("closing_date")} : {opportunity.pipeline.closed_at}
           </Text>
 
-          <Text style={styles.title}>Entreprise</Text>
+          <Text style={styles.title}>{t("company")}</Text>
           <TouchableOpacity
             onPress={() => handlePressCompany(opportunity.pipeline.company_id)}
           >
@@ -77,7 +79,7 @@ const Opportunity = () => {
             </View>
           </TouchableOpacity>
 
-          <Text style={styles.title}>Contact</Text>
+          <Text style={styles.title}>{t("contact")}</Text>
           <TouchableOpacity
             onPress={() => handlePressContact(opportunity.pipeline.contact_id)}
           >

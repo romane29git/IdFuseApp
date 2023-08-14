@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   Text,
   View,
@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import CompanyApi from "../api/companyApi";
 import Button from "./Button";
 import detachContactApi from "../api/detachContactApi";
+import LanguageContext from "../LanguageContext";
 
 const companyApi = new CompanyApi();
 const Tab = createMaterialTopTabNavigator();
@@ -25,6 +26,7 @@ const Company = ({ route }) => {
   const companyId = route.params.id;
   const navigation = useNavigation();
   const [isMapVisible, setIsMapVisible] = useState(false);
+  const { t, setLanguage } = useContext(LanguageContext);
 
   useEffect(() => {
     async function fetchCompanyData() {
@@ -87,7 +89,7 @@ const Company = ({ route }) => {
     return (
       <ScrollView style={styles.tabContainer}>
         <Button mode="outlined" onPress={() => handleAttachContact(company)}>
-          Ajouter
+          {t("add")}
         </Button>
         {contacts.length > 0 ? (
           contacts.map((contact, index) => (
@@ -98,10 +100,14 @@ const Company = ({ route }) => {
             >
               <View style={styles.contactContainer}>
                 <Text style={styles.contactText}>
-                  Prénom : {contact.firstName}
+                  {t("firstname")} : {contact.firstName}
                 </Text>
-                <Text style={styles.contactText}>Nom : {contact.lastName}</Text>
-                <Text style={styles.contactText}>Email : {contact.email}</Text>
+                <Text style={styles.contactText}>
+                  {t("lastname")} : {contact.lastName}
+                </Text>
+                <Text style={styles.contactText}>
+                  {t("email")} : {contact.email}
+                </Text>
               </View>
               <TouchableOpacity
                 onPress={() => handleDetachContact(contact)}
@@ -112,7 +118,7 @@ const Company = ({ route }) => {
             </TouchableOpacity>
           ))
         ) : (
-          <Text>Aucun contact disponible</Text>
+          <Text>{t("no_contact")}</Text>
         )}
       </ScrollView>
     );
@@ -126,18 +132,22 @@ const Company = ({ route }) => {
         {events.length > 0 ? (
           events.map((event, index) => (
             <View key={index} style={styles.contactContainer}>
-              <Text style={styles.contactText}>Event : {event.event_name}</Text>
               <Text style={styles.contactText}>
-                Date de début : {event.event_date_start}
+                {t("event_name")} : {event.event_name}
               </Text>
               <Text style={styles.contactText}>
-                Date de fin : {event.event_date_end}
+                {t("start_date")} : {event.event_date_start}
               </Text>
-              <Text style={styles.contactText}>Type : {event.event_type}</Text>
+              <Text style={styles.contactText}>
+                {t("end_date")} : {event.event_date_end}
+              </Text>
+              <Text style={styles.contactText}>
+                {t("type")} : {event.event_type}
+              </Text>
             </View>
           ))
         ) : (
-          <Text>Aucun événement disponible</Text>
+          <Text>{t("no_event")}</Text>
         )}
       </ScrollView>
     );
@@ -151,13 +161,17 @@ const Company = ({ route }) => {
         {invoices.length > 0 ? (
           invoices.map((invoice, index) => (
             <View key={index} style={styles.contactContainer}>
-              <Text style={styles.contactText}>Numéro : {invoice.number}</Text>
-              <Text style={styles.contactText}>Statut : {invoice.status}</Text>
               <Text style={styles.contactText}>
-                Date : {invoice.invoice_date}
+                {t("number")} : {invoice.number}
               </Text>
               <Text style={styles.contactText}>
-                Montant : {invoice.amount}€
+                {t("status")} : {invoice.status}
+              </Text>
+              <Text style={styles.contactText}>
+                {t("date")} : {invoice.invoice_date}
+              </Text>
+              <Text style={styles.contactText}>
+                {t("amount")} : {invoice.amount}€
               </Text>
               <TouchableOpacity onPress={() => handleOpenPDF(invoice.number)}>
                 <Icon name={"file-pdf"} size={28} color={"red"} />
@@ -173,7 +187,7 @@ const Company = ({ route }) => {
             </View>
           ))
         ) : (
-          <Text>Aucune facture disponible</Text>
+          <Text>{t("no_invoice")}</Text>
         )}
       </ScrollView>
     );
@@ -201,29 +215,29 @@ const Company = ({ route }) => {
               </View>
 
               <Text style={styles.legende}>
-                created at : {timeline.createdat}
+                {t("created_at")} : {timeline.createdat}
               </Text>
               <Text style={styles.contactText}>
-                Durée : {timeline.duration} minutes
+                {t("duration")} : {timeline.duration} minutes
               </Text>
               <Text style={styles.contactText}>
-                Type : {timeline.type_event}
+                {t("type")} : {timeline.type_event}
               </Text>
               <Text style={styles.contactText}>
-                Date : {timeline.date_start}
+                {t("date")} : {timeline.date_start}
               </Text>
               <Text style={styles.contactText}>
                 {timeline.firstName} {timeline.lastName}
               </Text>
               <Text style={styles.contactText}>
                 {timeline.comments_note
-                  ? `Commentaire : ${timeline.comments_note}`
+                  ? `${t("comments")} : ${timeline.comments_note}`
                   : null}
               </Text>
             </View>
           ))
         ) : (
-          <Text>Pas de timeline disponible</Text>
+          <Text>{t("no_timeline")}</Text>
         )}
       </ScrollView>
     );
@@ -282,7 +296,7 @@ const Company = ({ route }) => {
             style={styles.button}
             onPress={() => handleEdit(company)}
           >
-            <Text style={styles.buttonText}>Modifier</Text>
+            <Text style={styles.buttonText}>{t("update")}</Text>
           </TouchableOpacity>
           <Text style={styles.text}>
             {company.status === "customer" ? (
@@ -297,12 +311,13 @@ const Company = ({ route }) => {
           </Text>
           <Text style={styles.text}>SIREN : {company.siren}</Text>
           <Text style={styles.text}>
-            Numéro de compte : {company.account_number}
+            {t("account_nb")} : {company.account_number}
           </Text>
           {company && (company.address || company.address2) && (
             <TouchableOpacity onPress={() => handleAddress(company.address)}>
               <Text style={styles.text}>
-                Adresse : {company.address ? company.address : company.address2}
+                {t("address")} :{" "}
+                {company.address ? company.address : company.address2}
               </Text>
             </TouchableOpacity>
           )}
@@ -333,7 +348,7 @@ const Company = ({ route }) => {
             style={styles.closeButton}
             onPress={() => setIsMapVisible(false)}
           >
-            <Text style={styles.closeButtonText}>Fermer</Text>
+            <Text style={styles.closeButtonText}>{t("close")}</Text>
           </TouchableOpacity>
           <View style={styles.mapContainer}>
             {company && company.address && <Map address={company.address} />}

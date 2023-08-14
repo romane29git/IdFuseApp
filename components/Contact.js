@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
 import { useRoute } from "@react-navigation/native";
@@ -14,12 +14,14 @@ import { Linking } from "react-native";
 import Button from "./Button";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import detachContactApi from "../api/detachContactApi";
+import LanguageContext from "../LanguageContext";
 
 const Contact = () => {
   const [contact, setContact] = useState(null);
   const route = useRoute();
   const id = route.params.id;
   const navigation = useNavigation();
+  const { t, setLanguage } = useContext(LanguageContext);
 
   const updateContactId = (newId) => {
     navigation.setParams({ id: newId });
@@ -90,7 +92,7 @@ const Contact = () => {
           </Text>
           {contact.contact.emails && contact.contact.emails.length > 0 && (
             <>
-              <Text style={styles.title}>Mail</Text>
+              <Text style={styles.title}>{t("email")}</Text>
               {contact.contact.emails.map((contact, index) => (
                 <View key={index} style={styles.contactContainer}>
                   <TouchableOpacity onPress={() => sendEmail(contact.mail)}>
@@ -104,9 +106,9 @@ const Contact = () => {
           {contact.contact.companies &&
             contact.contact.companies.length > 0 && (
               <>
-                <Text style={styles.title}>Entreprises</Text>
+                <Text style={styles.title}>{t("companies")}</Text>
                 <Button mode="outlined" onPress={() => handleAttachCompany()}>
-                  Ajouter
+                  {t("add")}
                 </Button>
                 {contact.contact.companies.map((company, index) => (
                   <TouchableOpacity
@@ -130,7 +132,7 @@ const Contact = () => {
 
           {contact.contact.contacts && contact.contact.contacts.length > 0 && (
             <>
-              <Text style={styles.title}>Contacts</Text>
+              <Text style={styles.title}>{t("contacts")}</Text>
               {contact.contact.contacts.map((contact, index) => (
                 <TouchableOpacity
                   key={index}
@@ -149,7 +151,7 @@ const Contact = () => {
           {contact.contact.opportunities &&
             contact.contact.opportunities.length > 0 && (
               <>
-                <Text style={styles.title}>Opportunités</Text>
+                <Text style={styles.title}>{t("opportunities")}</Text>
                 {contact.contact.opportunities.map((opportunity, index) => (
                   <TouchableOpacity
                     key={index}

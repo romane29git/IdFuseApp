@@ -7,10 +7,11 @@ import {
   Image,
   FlatList,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import attachContactApi from "../api/attachContactApi";
+import LanguageContext from "../LanguageContext";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -19,6 +20,7 @@ const AttachContact = ({ route }) => {
   const navigation = useNavigation();
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const { t, setLanguage } = useContext(LanguageContext);
 
   const handleSearch = async (value) => {
     setSearchTerm(value);
@@ -42,7 +44,7 @@ const AttachContact = ({ route }) => {
 
   const handleClick = async (item) => {
     try {
-      await attachContactApi(item.id,idCompany);
+      await attachContactApi(item.id, idCompany);
     } catch (error) {
       console.error(
         "Une erreur s'est produite lors de la modification de l'entreprise :",
@@ -70,7 +72,7 @@ const AttachContact = ({ route }) => {
           style={styles.backArrow}
         />
       </TouchableOpacity>
-      <Text>Ajouter un contact à l'entreprise</Text>
+      <Text>{t("add_contact_to_company")}</Text>
 
       <TextInput
         style={styles.input}
@@ -91,7 +93,7 @@ const AttachContact = ({ route }) => {
           </Tab.Screen>
         </Tab.Navigator>
       ) : (
-        <Text>Aucun résultat trouvé.</Text>
+        <Text>{t("no_result")}</Text>
       )}
     </View>
   );
